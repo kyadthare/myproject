@@ -1,0 +1,10 @@
+com\humanServices\controller\IndexController.class
+com\humanServices\Dao\ProviderDao.class
+com\humanServices\entities\Address.class
+com\humanServices\service\ProviderService.class
+com\humanServices\entities\Provider.class
+com\humanServices\entities\ProviderType.class
+com\humanServices\service\ProviderServiceImpl.class
+com\humanServices\controller\ProviderController.class
+com\humanServices\entities\QualityStarRating.class
+com\humanServices\Dao\ProviderDaoImpl.class

@@ -1,0 +1,30 @@
+/* Styles go here */
+body{
+  margin-top:0px;
+  background-color:white;
+  padding: 5px 0 0 0 ;
+}
+.SpringApp-header{
+  margin-top:0px;
+  top:0px;
+  height:100px;
+  background-color:aqua;
+}
+
+.Spring-Search-Form{
+  margin-top:0px;
+  background-color:red;
+}
+
+.Spring-Search-Result{
+  margin-top:0px;
+  background-color:green;
+}
+
+.SpringApp-footer{
+  margin-top:0px;
+  margin-bottom :0px;
+  bottom:0px;
+  height:100px;
+  background-color:orange;
+}
