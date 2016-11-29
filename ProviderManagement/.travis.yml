@@ -1,0 +1,18 @@
+language: java
+rvm:
+- 2.1
+
+script: bundle exec jekyll build
+
+branches:
+  only:
+    - master
+
+deploy:
+  provider: cloudfoundry
+  edge: true
+  api: $CF_API
+  username: $CF_USER
+  password: $CF_PASS
+  organization: $CF_ORG
+  space: $CF_ENV 
