@@ -1,5 +1,5 @@
 /* Styles go here */
-body{
+/* body{
   margin-top:0px;
   background-color:white;
   padding: 5px 0 0 0 ;
@@ -27,4 +27,14 @@ body{
   bottom:0px;
   height:100px;
   background-color:orange;
+} */
+
+.glyphicon-star-empty{
+  font-size:1.5em;
+  color:grey;
+}
+
+.glyphicon-star{
+  font-size:1.5em;
+  color:yellow;
 }

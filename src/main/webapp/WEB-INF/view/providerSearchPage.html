@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<div class="container" data-ng-controller="providerSearchController">
+
+		<div style="/* background-color: white; */ color: black;">
+			<form name="mdhsProviderSearch" id="SpringAppForm" class="form-horizontal">
+				<fieldset>
+			        <legend> Search Child Care Provider </legend>
+			        <br/>
+					<div class="form-group">
+						<label for="ProviderName" class="col-sm-3 control-label">Provider Name</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" data-ng-model="searchData.name" id="Provider Name" name="Provider Name" />
+						</div>
+						<div class="col-sm-3"></div>
+					</div>
+					<div class="form-group">
+						<label for="providerType" class="col-sm-3 control-label">Provider Type</label>
+						<div class="col-sm-6">
+							<select id="providerType" class="form-control" name="providerType" data-ng-model="searchData.providerType" data-ng-options="providerType.description for providerType in dropDownData.providerType"></select>
+						</div>
+						<div class="col-sm-3"></div>
+					</div>
+					<div class="form-group">
+						<label for="county" class="col-sm-3 control-label">County</label>
+						<div class="col-sm-6">
+							<select data-ng-model="searchData.addressCounty" class="form-control" id="addressCounty" name="addressCounty" data-ng-options="addressCounty.county for addressCounty in dropDownData.county" data-ng-change="getCity()" ></select>
+						</div>
+						<div class="col-sm-3"></div>
+					</div>
+					<div class="form-group">
+						<label for="city" class="col-sm-3 control-label">City</label>
+						<div class="col-sm-6">
+							<select class="form-control" data-ng-model="searchData.addressCity"
+								id="addressCity" name="addressCity"
+								data-ng-options="addressCity.city for addressCity in dropDownData.city"></select>
+						</div>
+						<div class="col-sm-3"></div>
+					</div>
+					<div class="form-group">
+						<label for="QualityRating" class="col-sm-3 control-label">Quality Star Rating</label>
+						<div class="col-sm-6">
+							<select class="form-control" id="qualityRating" name="qualityRating"
+							data-ng-model="searchData.qualityRating"
+								data-ng-options="qualityRating.ratingId for qualityRating in dropDownData.qualityRating"></select>
+						</div>
+						<div class="col-sm-3"></div>
+					</div>
+			        <div class="form-group">        
+						<div class="col-sm-offset-3 col-sm-9">
+							<button class="btn btn-primary" data-ng-click="providerSearch(searchData)" type="submit">Search</button>
+							<button class="btn btn-default" type="reset" data-ng-click="resetData()">Reset</button>
+						</div>
+					</div>
+			      </fieldset>
+			</form>
+		</div>
+		<div style="background-color: white;">
+			<table class="table table-striped">
+				<tbody>
+					<tr data-dir-paginate="provider in getSearchData|itemsPerPage:2">
+						<td>{{provider.name}}<br></br>
+						<strong>Type:</strong> {{provider.providerType.description}}</td>
+						<td>{{provider.licenseType}}<br></br>
+						<strong>Capacity:</strong> {{provider.capacity}}</td>
+						<td><strong>County:</strong> {{provider.address.county}}<br></br>
+						<strong>City:</strong> {{provider.address.city}}<br></br>
+						<strong>Contact No:</strong> {{provider.phoneNumber}}</td>
+						<td><span data-uib-rating="" data-ng-model="provider.rating.ratingId" data-max="5" data-read-only="true" ></span>{{provider.rating.description}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="container col-sm-offset-3 col-sm-9">
+				<dir-pagination-controls
+				   max-size="5"
+				   direction-links="true"
+				   boundary-links="true" >
+				</dir-pagination-controls>
+			</div>
+		</div>
+	</div>
+</html>
