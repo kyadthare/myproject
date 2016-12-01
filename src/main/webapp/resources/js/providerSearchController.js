@@ -26,28 +26,20 @@
 		}
 	}
 	
-	var loadSearchData = {
-		providerName:"",
-		providerType:[],
-		county:[],
-		city:[],
-		qualityRating:[]
-	}
-	
 	var loadProviderTypes = function(response) {
-		loadSearchData.providerType = response.data;
+		$scope.dropdowndata.providerType = response.data;
 	};
 	
 	var loadCounty = function(response) {
-		loadSearchData.county = response.data;
+		$scope.dropdowndata.county = response.data;
 	};
 	
 	var loadCity = function(response) {
-		loadSearchData.city = response.data;
+		$scope.dropdowndata.city = response.data;
 	};
 		
 	var loadQRating = function(response) {
-		loadSearchData.qualityRating = response.data;
+		$scope.dropdowndata.qualityRating = response.data;
 	};
 
     var onError = function(response) {
@@ -88,7 +80,6 @@
         $http.get('loadCounty').then(loadCounty, onError);
     }
     
-    $scope.dropdowndata = loadSearchData;
     
     $scope.sortByFields = [{
     	name:"Provider Name",
