@@ -24,7 +24,7 @@
 					<div class="form-group">
 						<label for="county" class="col-sm-3 control-label">County</label>
 						<div class="col-sm-6">
-							<select data-ng-model="searchData.addressCounty" class="form-control" id="county" name="county" data-ng-options="addressCounty.county for addressCounty in dropDownData.county" data-ng-change="getCity()" ></select>
+							<select data-ng-model="searchData.addressCounty" class="form-control" id="county" name="county" data-ng-options="county.county for county in dropDownData.county" data-ng-change="getCity()" ></select>
 						</div>
 						<div class="col-sm-3"></div>
 					</div>
@@ -48,8 +48,8 @@
 					</div>
 			        <div class="form-group">        
 						<div class="col-sm-offset-3 col-sm-9">
-							<button class="btn btn-primary" data-ng-click="providerSearch(searchData)" type="submit">Search</button>
-							<button class="btn btn-default" type="reset" data-ng-click="resetData()">Reset</button>
+							<button id="submitButton" class="btn btn-primary" data-ng-click="providerSearch(searchData)" type="submit">Search</button>
+							<button id="resetButton" class="btn btn-default" type="reset" data-ng-click="resetData()">Reset</button>
 						</div>
 					</div>
 					<div class="col-sm-offset-3 col-sm-9 text-danger" data-ng-show="invalidData">
