@@ -17,14 +17,14 @@
 					<div class="form-group">
 						<label for="providerType" class="col-sm-3 control-label">Provider Type</label>
 						<div class="col-sm-6">
-							<select id="providerType" class="form-control" name="providerType" data-ng-model="searchData.providerType" data-ng-options="providerType.description for providerType in dropDownData.providerType"></select>
+							<select id="providerType" class="form-control" name="providerType" data-ng-model="searchData.providerType" data-ng-options="providerType.description for providerType in providerType"></select>
 						</div>
 						<div class="col-sm-3"></div>
 					</div>
 					<div class="form-group">
 						<label for="county" class="col-sm-3 control-label">County</label>
 						<div class="col-sm-6">
-							<select data-ng-model="searchData.addressCounty" class="form-control" id="county" name="county" data-ng-options="county.county for county in dropDownData.county" data-ng-change="getCity()" ></select>
+							<select data-ng-model="searchData.addressCounty" class="form-control" id="county" name="county" data-ng-options="county.county for county in county" data-ng-change="getCity()" ></select>
 						</div>
 						<div class="col-sm-3"></div>
 					</div>
@@ -33,7 +33,7 @@
 						<div class="col-sm-6">
 							<select class="form-control" data-ng-model="searchData.addressCity"
 								id="city" name="city"
-								data-ng-options="city.city for city in dropDownData.city"></select>
+								data-ng-options="city.city for city in city"></select>
 						</div>
 						<div class="col-sm-3"></div>
 					</div>
@@ -42,7 +42,7 @@
 						<div class="col-sm-6">
 							<select class="form-control" id="qualityRating" name="qualityRating"
 							data-ng-model="searchData.qualityRating"
-								data-ng-options="qualityRating.ratingId for qualityRating in dropDownData.qualityRating"></select>
+								data-ng-options="qualityRating.ratingId for qualityRating in qualityRating"></select>
 						</div>
 						<div class="col-sm-3"></div>
 					</div>
@@ -62,12 +62,12 @@
 			<div class="col-sm-offset-3 col-sm-9 text-info" data-ng-show="emptyResult">No results to display</div>
 			<div class="container">
 				<label for="sortBy">SortBy:</label>
-				<select id="sortBy" name="sortBy" data-ng-model="sortBy" data-ng-change="sortSearch()"
+				<select id="sortBy" name="sortBy" data-ng-model="sortBy" data-ng-change="sortBySearch(sortBy)"
 								data-ng-options="sortByFields.name for sortByFields in sortByFields"></select>
 			</div>
 			<div>
-				<button id="sortOrder" class="btn btn-default btn-sm" data-ng-click="sortSearch()">
-					<span class="glyphicon glyphicon-sort"></span> {{sortOrder}}
+				<button id="sortOrder" class="btn btn-default btn-sm" data-ng-click="changeSortSign()">
+					<span class="glyphicon glyphicon-sort"></span>
 				</button>
 			</div>
 			<div class="container col-sm-offset-3 col-sm-9">
@@ -79,7 +79,7 @@
 			</div>
 			<table class="table table-striped">
 				<tbody>
-					<tr data-dir-paginate="provider in getSearchData|itemsPerPage:10">
+					<tr data-dir-paginate="provider in getSearchData | orderBy:sortBy:sortSign | itemsPerPage:10">
 						<td>{{provider.name}}<br></br>
 						<strong>Type:</strong> {{provider.providerType.description}}</td>
 						<td>{{provider.licenseType}}<br></br>

@@ -16,6 +16,8 @@
 				if(response.data){
 					$scope.getSearchData = response.data;
 					$scope.emptyResult = false;
+					$scope.sortOrder = 'name';
+					$scope.sortSign = true;
 					scrollTo('SearchResult');
 				}else{
 					$scope.emptyResult = true;
@@ -26,20 +28,28 @@
 		}
 	}
 	
+	$scope.changeSortSign = function(){
+		$scope.sortSign = !($scope.sortSign);
+	}
+	
+	$scope.sortBySearch = function(sortBy){
+		$scope.sortSign = true;
+	}
+	
 	var loadProviderTypes = function(response) {
-		$scope.dropdowndata.providerType = response.data;
+		$scope.providerType = response.data;
 	};
 	
 	var loadCounty = function(response) {
-		$scope.dropdowndata.county = response.data;
+		$scope.county = response.data;
 	};
 	
 	var loadCity = function(response) {
-		$scope.dropdowndata.city = response.data;
+		$scope.city = response.data;
 	};
 		
 	var loadQRating = function(response) {
-		$scope.dropdowndata.qualityRating = response.data;
+		$scope.qualityRating = response.data;
 	};
 
     var onError = function(response) {
