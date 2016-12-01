@@ -1,65 +1,20 @@
 (function() {
-  var mdhsApp = angular.module("providerApp");
+  var providerApp = angular.module("providerApp");
 
-  var MDHSSearchController = function($scope, $http) {
-    $scope.providerName = "example";
-    $scope.message = "Hello Plunker!";
+  var providerSearchController = function($scope, $http, $location, $anchorScroll) {
 
-    $scope.providerSearch = function(searchData) {
-      if ($scope.searchData) {
-    	  $http.post('searchProvider', searchData).then(function(response) {
-    	      $scope.getSearchData = response.data;
-    	    });
-      } 
-    };
-    
-    $scope.resetData = function() {
-      $scope.searchData = null;
-      $scope.getSearchData = null;
-    };
-    
-    var loadSearchData = {
-      providerName: "",
-      providerType: [],
-      county: [],
-      city: [],
-      qualityRating: []
-    };
+	$scope.dropDownData = getSearchData;
+	
+	var getSearchData = function(){
+    	$http.get('loadProviderType').then(loadProviderTypes, onError);
+        $http.get('loadRatings').then(loadQRating, onError);
+        $http.get('loadCity').then(loadCity, onError);
+        $http.get('loadCounty').then(loadCounty, onError);
+    }
 
-    var errorCount = 0;
     var onError = function() {
-      loadSearchData.providerType = [{
-        "providerId": 1,
-        "value": "test1"
-      }, {
-        "providerId": 2,
-        "value": "test2"
-      }];
-      loadSearchData.county = [{
-        "countyId": 1,
-        "value": "test1"
-      }, {
-        "countyId": 2,
-        "value": "test2"
-      }];
-      loadSearchData.city = [{
-        "cityId": 1,
-        "value": "test1"
-      }, {
-        "cityId": 2,
-        "value": "test2"
-      }];
-      loadSearchData.qRating = [{
-        "qRatingId": 1,
-        "value": "test1"
-      }, {
-        "qRatingId": 2,
-        "value": "test2"
-      }];
-    };
-
-    var onError1 = function() {
       $scope.errorCount = errorCount++;
+      $scope.errorReason = "Failed to load some of the search data";
     };
 
     var loadProviderTypes = function(response) {
@@ -77,18 +32,57 @@
     var loadQRating = function(response) {
       loadSearchData.qualityRating = response.data;
     };
-
-    {
-      $http.get('loadProviderType').then(loadProviderTypes, onError);
-      $http.get('loadRatings').then(loadQRating, onError1);
-      $http.get('loadCity').then(loadCity, onError1);
-      $http.get('loadCounty').then(loadCounty, onError1);
+	  
+	$scope.providerSearch = function(searchData) {
+		if ($scope.searchData) {
+			$scope.invalidData = false;
+			$http.post('searchProvider', searchData).then(function(response) {
+				if(response.data){
+					$scope.getSearchData = response.data;
+					$scope.emptyResult = false;
+					scrollTo('SearchResult');
+				}else{
+					$scope.emptyResult = true;
+				}
+			});
+		}else{
+			$scope.invalidData = true;
+		}
+    };
+    
+    $scope.scrollTo = function(position){
+    	scrollTo(position);
     }
     
-
-    $scope.dropDownData = loadSearchData;
-
+    function scrollTo(position){
+    	if(position=="SearchResult"){
+    		$location.hash('SearchResult');
+    	}else{
+    		$location.hash('header');
+    	}
+        $anchorScroll();
+    }
+    
+    $scope.resetData = function() {
+      $scope.searchData = null;
+      $scope.getSearchData = null;
+    };
+    
+    $scope.sortByFields = [{
+    	name:"Provider Name",
+    	value:"one"
+    		
+    }];
+    
+    var loadSearchData = {
+      providerName: "",
+      providerType: [],
+      county: [],
+      city: [],
+      qualityRating: []
+    };
+    
   };
 
-  mdhsApp.controller("providerSearchController", MDHSSearchController);
+  providerApp.controller("providerSearchController", providerSearchController);
 }());

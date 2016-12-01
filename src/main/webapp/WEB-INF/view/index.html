@@ -18,17 +18,17 @@
 
 </head>
 
-<body class="container-fluid">
-	<header id="header">Header<br/>
+<body class="container-fluid" data-ng-controller="providerSearchController">
+	<header id="header">
 	<img src="resources/images/mdhs_logo.png" class="img-responsive" alt="MDHS_LOGO" width="256" height="110" />
 	</header>
 	<hr/>
 	<div data-ng-view=""></div>
 	<hr/>
-	<footer>Footer<br/>
-	<a href="header">Return to Top</a>
+	<footer>
+	<a href="" data-ng-click="scrollTo(header)">Return to Top</a>
 	<div class="col-sm-offset-6">This is an Sample Web page Developed for the RFP of Mississippi Department of Human Services</div><br/>
-	<span class="glyphicon glyphicon-copyright-mark"></span><a href="www.ibm.in">IBM India Pvt Ltd</a></footer>
+	<span class="glyphicon glyphicon-copyright-mark"></span>2016<a href="www.ibm.in">IBM India Pvt Ltd</a></footer>
 </body>
 
 

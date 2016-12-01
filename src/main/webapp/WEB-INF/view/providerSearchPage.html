@@ -2,7 +2,7 @@
 <html>
 	<div class="container" data-ng-controller="providerSearchController">
 
-		<div style="/* background-color: white; */ color: black;">
+		<div>
 			<form name="mdhsProviderSearch" id="SpringAppForm" class="form-horizontal">
 				<fieldset>
 			        <legend> Search Child Care Provider </legend>
@@ -52,13 +52,27 @@
 							<button class="btn btn-default" type="reset" data-ng-click="resetData()">Reset</button>
 						</div>
 					</div>
+					<div class="col-sm-offset-3 col-sm-9 text-danger" data-ng-show="invalidData">Please specify at least one search criteria</div>
 			      </fieldset>
 			</form>
 		</div>
-		<div style="background-color: white;">
+		<div id="SearchResult">
+			<div class="col-sm-offset-3 col-sm-9 text-info" data-ng-show="emptyResult">No results to display</div>
+			<div class="container">
+				<label for="sortBy">SortBy:</label>
+				<select id="sortBy" data-ng-model="sortBy"
+								data-ng-options="sortByFields.name for sortByFields in sortByFields"></select>
+			</div>
+			<div class="container col-sm-offset-3 col-sm-9">
+				<dir-pagination-controls
+				   max-size="5"
+				   direction-links="true"
+				   boundary-links="true" >
+				</dir-pagination-controls>
+			</div>
 			<table class="table table-striped">
 				<tbody>
-					<tr data-dir-paginate="provider in getSearchData|itemsPerPage:2">
+					<tr data-dir-paginate="provider in getSearchData|itemsPerPage:10">
 						<td>{{provider.name}}<br></br>
 						<strong>Type:</strong> {{provider.providerType.description}}</td>
 						<td>{{provider.licenseType}}<br></br>
@@ -66,7 +80,7 @@
 						<td><strong>County:</strong> {{provider.address.county}}<br></br>
 						<strong>City:</strong> {{provider.address.city}}<br></br>
 						<strong>Contact No:</strong> {{provider.phoneNumber}}</td>
-						<td><span data-uib-rating="" data-ng-model="provider.rating.ratingId" data-max="5" data-read-only="true" ></span>{{provider.rating.description}}</td>
+						<td><span data-uib-rating="" data-ng-model="provider.rating.ratingId" data-max="5" data-read-only="true" ></span></td>
 					</tr>
 				</tbody>
 			</table>
