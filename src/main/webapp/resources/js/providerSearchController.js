@@ -3,9 +3,27 @@
 
   var providerSearchController = function($scope, $http, $location, $anchorScroll) {
 
-	$scope.dropDownData = getSearchData;
+	$scope.dropDownData = loadSearchData;
 	
-	var getSearchData = function(){
+	$scope.providerSearch = function(searchData){
+		alert("inside search");
+		if ($scope.searchData) {
+			$scope.invalidData = false;
+			$http.post('searchProvider', searchData).then(function(response) {
+				if(response.data){
+					$scope.getSearchData = response.data;
+					$scope.emptyResult = false;
+					scrollTo('SearchResult');
+				}else{
+					$scope.emptyResult = true;
+				}
+			});
+		}else{
+			$scope.invalidData = true;
+		}
+	}
+	
+	{
     	$http.get('loadProviderType').then(loadProviderTypes, onError);
         $http.get('loadRatings').then(loadQRating, onError);
         $http.get('loadCity').then(loadCity, onError);
@@ -33,23 +51,6 @@
       loadSearchData.qualityRating = response.data;
     };
 	  
-	$scope.providerSearch = function(searchData) {
-		if ($scope.searchData) {
-			$scope.invalidData = false;
-			$http.post('searchProvider', searchData).then(function(response) {
-				if(response.data){
-					$scope.getSearchData = response.data;
-					$scope.emptyResult = false;
-					scrollTo('SearchResult');
-				}else{
-					$scope.emptyResult = true;
-				}
-			});
-		}else{
-			$scope.invalidData = true;
-		}
-    };
-    
     $scope.scrollTo = function(position){
     	scrollTo(position);
     }
@@ -66,12 +67,19 @@
     $scope.resetData = function() {
       $scope.searchData = null;
       $scope.getSearchData = null;
+      $scope.invalidData = false;
+      $scope.emptyResult = false;
     };
     
     $scope.sortByFields = [{
     	name:"Provider Name",
     	value:"one"
-    		
+    },{
+    	name:"Provider Type",
+    	value:"two"
+    },{
+    	name:"city",
+    	value:"three"
     }];
     
     var loadSearchData = {
