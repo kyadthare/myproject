@@ -27,7 +27,11 @@
 	}
 	
 	var loadSearchData = {
-			
+		providerName:"",
+		providerType:[],
+		county:[],
+		city:[],
+		qualityRating:[]
 	}
 	
 	var loadProviderTypes = function(response) {
