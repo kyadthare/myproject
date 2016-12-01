@@ -99,6 +99,12 @@
     },{
     	name:"city",
     	value:"three"
+    },{
+    	name:"county",
+    	value:"three"
+    },{
+    	name:"qualityRating",
+    	value:"three"
     }];
     
         
