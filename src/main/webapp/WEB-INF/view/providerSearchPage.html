@@ -60,12 +60,10 @@
 		<hr></hr>
 		<div id="SearchResult" data-ng-show="displayResult">
 			<div class="col-sm-offset-3 col-sm-9 text-info" data-ng-show="emptyResult">No results to display</div>
-			<div class="container">
+			<div class="container text-right">
 				<label for="sortBy">SortBy:</label>
 				<select id="sortBy" name="sortBy" data-ng-model="sortBy" data-ng-change="sortBySearch(sortBy)"
 								data-ng-options="sortByFields.name for sortByFields in sortByFields"></select>
-			</div>
-			<div>
 				<button id="sortOrder" class="btn btn-default btn-sm" data-ng-click="changeSortSign()">
 					<span class="glyphicon glyphicon-sort"></span>
 				</button>

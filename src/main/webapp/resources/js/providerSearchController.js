@@ -18,6 +18,7 @@
 					$scope.emptyResult = false;
 					$scope.sortOrder = 'name';
 					$scope.sortSign = true;
+					$scope.displayResult = true;
 					scrollTo('SearchResult');
 				}else{
 					$scope.emptyResult = true;
@@ -81,6 +82,7 @@
       $scope.getSearchData = null;
       $scope.invalidData = false;
       $scope.emptyResult = false;
+      $scope.displayResult = false;
     };
     
     {
