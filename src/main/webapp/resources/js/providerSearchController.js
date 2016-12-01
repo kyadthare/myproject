@@ -30,13 +30,6 @@
 			
 	}
 	
-	{
-    	$http.get('loadProviderType').then(loadProviderTypes, onError);
-        $http.get('loadRatings').then(loadQRating, onError);
-        $http.get('loadCity').then(loadCity, onError);
-        $http.get('loadCounty').then(loadCounty, onError);
-    }
-	
 	var loadProviderTypes = function(response) {
 		loadSearchData.providerType = response.data;
 	};
@@ -83,6 +76,13 @@
       $scope.invalidData = false;
       $scope.emptyResult = false;
     };
+    
+    {
+    	$http.get('loadProviderType').then(loadProviderTypes, onError);
+        $http.get('loadRatings').then(loadQRating, onError);
+        $http.get('loadCity').then(loadCity, onError);
+        $http.get('loadCounty').then(loadCounty, onError);
+    }
     
     $scope.dropdowndata = loadSearchData;
     
