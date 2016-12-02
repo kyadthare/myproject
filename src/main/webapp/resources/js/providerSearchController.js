@@ -1,7 +1,7 @@
 (function() {
   var providerApp = angular.module("providerApp");
 
-  var providerSearchController = function($scope, $http, $location, $anchorScroll) {
+  var providerSearchController = function($scope, $http, $location, $anchorScroll, $timeout) {
 
 	/*$scope.dropDownData.providerType = $http.get('loadProviderType').then(returnResponse, onError);
 	$scope.dropDownData.qualityRating = $http.get('loadRatings').then(returnResponse, onError);
@@ -69,12 +69,17 @@
     }
     
     function scrollTo(position){
-    	if(position=="SearchResult"){
-    		$location.hash('SearchResult');
-    	}else{
-    		$location.hash('header');
-    	}
-        $anchorScroll();
+    	var id = $location.hash();
+    	$timeout(function(){
+    		if(position=="SearchResult"){
+        		$location.hash('SearchResult');
+        	}else{
+        		$location.hash('header');
+        	}
+        	
+            $anchorScroll();
+            $location.hash(id);
+    	});
     }
     
     $scope.resetData = function() {
@@ -95,19 +100,19 @@
     
     $scope.sortByFields = [{
     	name:"Provider Name",
-    	value:"one"
+    	value:"name"
     },{
     	name:"Provider Type",
-    	value:"two"
+    	value:"providerType.description"
     },{
-    	name:"city",
-    	value:"three"
+    	name:"City",
+    	value:"address.city"
     },{
-    	name:"county",
-    	value:"three"
+    	name:"County",
+    	value:"address.county"
     },{
-    	name:"qualityRating",
-    	value:"three"
+    	name:"Quality Star Rating",
+    	value:"rating.ratingId"
     }];
     
         
