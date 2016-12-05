@@ -1,115 +1,118 @@
 <!DOCTYPE html>
 <html>
-	<div class="container-fluid" data-ng-controller="providerSearchController">
 
-		<div id="formStart">
-			<form name="providerAppForm" id="providerAppForm" class="form-horizontal">
-				<fieldset>
-			        <legend style="color:rgb(155, 187, 88)"> Search Child Care Provider </legend>
-			        <br/>
-					<div class="form-group">
-						<label for="providerName" class="col-sm-3 control-label">Provider Name</label>
-						<div class="col-sm-6">
-							<input type="text" class="form-control" data-ng-model="searchData.name" id="providerName" name="providerName" />
-						</div>
-						<div class="col-sm-3"></div>
-					</div>
-					<div class="form-group">
-						<label for="providerType" class="col-sm-3 control-label">Provider Type</label>
-						<div class="col-sm-6">
-							<select id="providerType" class="form-control" name="providerType" data-ng-model="searchData.providerType" data-ng-options="providerType.description for providerType in providerType">
-								<option value="">--- Select ---</option>
-							</select>
-						</div>
-						<div class="col-sm-3"></div>
-					</div>
-					<div class="form-group">
-						<label for="county" class="col-sm-3 control-label">County</label>
-						<div class="col-sm-6">
-							<select data-ng-model="searchData.addressCounty" class="form-control" id="county" name="county" data-ng-options="county.county for county in county" data-ng-change="getCity()" >
-								<option value="">--- Select ---</option>
-							</select>
-						</div>
-						<div class="col-sm-3"></div>
-					</div>
-					<div class="form-group">
-						<label for="city" class="col-sm-3 control-label">City</label>
-						<div class="col-sm-6">
-							<select class="form-control" data-ng-model="searchData.addressCity"
-								id="city" name="city"
-								data-ng-options="city.city for city in city">
-									<option value="">--- Select ---</option>
-								</select>
-						</div>
-						<div class="col-sm-3"></div>
-					</div>
-					<div class="form-group">
-						<label for="qualityRating" class="col-sm-3 control-label">Quality Star Rating</label>
-						<div class="col-sm-6">
-							<select class="form-control" id="qualityRating" name="qualityRating"
-							data-ng-model="searchData.qualityRating"
-								data-ng-options="qualityRating.ratingId for qualityRating in qualityRating">
-									<option value="">--- Select ---</option>
-								</select>
-						</div>
-						<div class="col-sm-3"></div>
-					</div>
-			        <div class="form-group">        
-						<div class="col-sm-offset-3 col-sm-9">
-							<button id="submitButton" class="btn btn-primary" data-ng-click="providerSearch(searchData)" type="submit">Search</button>
-							<button id="resetButton" class="btn btn-default" type="reset" data-ng-click="resetData()">Reset</button>
-						</div>
-					</div>
-					<div class="col-sm-offset-3 col-sm-9 text-danger" data-ng-show="invalidData">
-						<Strong>Please specify at least one search criteria</Strong></div>
-			      </fieldset>
-			</form>
-		</div>
-		<hr></hr>
-		<div id="SearchResult" data-ng-show="displayResult">
-			<div class="col-sm-offset-3 col-sm-9 text-info" data-ng-show="emptyResult"><Strong>No results to display</Strong></div>
-			<div class="container text-right">
-				<label for="sortBy">SortBy:</label>
-				<select id="sortBy" name="sortBy" data-ng-model="sortBy" data-ng-change="sortBySearch(sortBy)"
-								data-ng-options="sortByFields.name for sortByFields in sortByFields"></select>
-				<button id="sortOrder" class="btn btn-default btn-sm" data-ng-click="changeSortSign()">
-					<span class="glyphicon glyphicon-sort"></span>
-				</button>
-			</div>
-			<div class="container col-sm-offset-3 col-sm-9">
-				<dir-pagination-controls
-				   max-size="5"
-				   direction-links="true"
-				   boundary-links="true" >
-				</dir-pagination-controls>
-			</div>
-			<table class="table table-striped">
-				<tbody>
-					<tr data-dir-paginate="provider in getSearchData | orderBy:sortBy:sortSign | itemsPerPage:10">
-						<td class="col-sm-5"><h2 style="color:#813D31">{{provider.name}}</h2><br></br>
-						<label for="providerType">Type: </label>{{provider.providerType.description}}
-						<label for="providerCapacity">Capacity: </label>{{provider.capacity}}</td>
-						<td class="text-right col-sm-2">
-						<label for="phoneNum">Phone No: </label><br></br>
-						<label for="county">County: </label><br></br>
-						<label for="city">City: </label>
-						</td>
-						<td class="col-sm-2">{{provider.phoneNumber}}<br></br>
-						{{provider.address.county}}<br></br>
-						{{provider.address.city}}
-						</td>
-						<td class="col-sm-3"><span data-uib-rating="" data-ng-model="provider.rating.ratingId" data-max="5" data-read-only="true" ></span></td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="container col-sm-offset-3 col-sm-9">
-				<dir-pagination-controls
-				   max-size="5"
-				   direction-links="true"
-				   boundary-links="true" >
-				</dir-pagination-controls>
-			</div>
-		</div>
-		<hr></hr>
-	</div>
+<div class="container-fluid" data-ng-controller="providerSearchController">
+  <!-- div for Search Form -->
+  <div id="formStart">
+    <form name="providerAppForm" id="providerAppForm" class="form-horizontal">
+      <fieldset>
+        <legend style="color:rgb(155, 187, 88)"> Search Child Care Provider </legend>
+        <br/>
+        <div class="form-group">
+          <label for="providerName" class="col-sm-3 control-label">Provider Name</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" data-ng-model="searchData.providerName" id="providerName" name="providerName" />
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="form-group">
+          <label for="providerType" class="col-sm-3 control-label">Provider Type</label>
+          <div class="col-sm-6">
+            <select id="providerType" class="form-control" name="providerType" data-ng-model="searchData.providerType" data-ng-options="providerType.description for providerType in providerType">
+              <option value="">--- Select ---</option>
+            </select>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="form-group">
+          <label for="county" class="col-sm-3 control-label">County</label>
+          <div class="col-sm-6">
+            <select data-ng-model="searchData.county" class="form-control" id="county" name="county" data-ng-options="county for county in county" data-ng-change="getCity(searchData.county)">
+              <option value="">--- Select ---</option>
+            </select>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="form-group">
+          <label for="city" class="col-sm-3 control-label">City</label>
+          <div class="col-sm-6">
+            <select class="form-control" data-ng-model="searchData.city" id="city" name="city" data-ng-options="city for city in city">
+              <option value="">--- Select ---</option>
+            </select>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="form-group">
+          <label for="qualityRating" class="col-sm-3 control-label">Quality Star Rating</label>
+          <div class="col-sm-6">
+            <select class="form-control" id="qualityRating" name="qualityRating" data-ng-model="searchData.qualityRating" data-ng-options="qualityRating.ratingId for qualityRating in qualityRating">
+              <option value="">--- Select ---</option>
+            </select>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <button id="submitButton" class="btn btn-primary" data-ng-click="providerSearch(searchData)" type="submit">Search</button>
+            <button id="resetButton" class="btn btn-default" type="reset" data-ng-click="resetData()">Reset</button>
+          </div>
+        </div>
+        <div class="col-sm-offset-3 col-sm-9 text-danger" data-ng-show="invalidData">
+          <Strong>Please specify at least one search criteria</Strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <hr></hr>
+  <!-- div For Displaying the search result -->
+  <div id="SearchResult" data-ng-show="displayResult">
+    <div class="col-sm-offset-3 col-sm-9 text-info" data-ng-show="emptyResult">
+      <Strong>No results to display</Strong>
+    </div>
+    <div class="container text-right">
+      <label for="sortBy">SortBy:</label>
+      <select id="sortBy" name="sortBy" data-ng-model="sortBy" data-ng-change="sortBySearch(sortBy)" data-ng-options="sortByField.name for sortByField in sortByFields"></select>
+      <button id="sortOrder" class="btn btn-default btn-sm" data-ng-click="changeSortSign()">
+        <span class="glyphicon glyphicon-sort"></span>
+      </button>
+    </div>
+    <!-- div For providing the pagination option -->
+    <div class="container col-sm-offset-3 col-sm-9">
+      <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true">
+      </dir-pagination-controls>
+    </div>
+    <table class="table table-striped">
+      <tbody>
+        <tr data-dir-paginate="provider in getSearchData | orderBy:sortBy.value:sortSign | itemsPerPage:10" current-page="currentPage">
+          <td class="col-sm-5">
+            <h5 style="color:#813D31">{{provider.name}}</h5>
+            <br></br>
+            <label for="providerType">Type: </label>{{provider.providerType.description}}
+            <br></br>
+            <label for="providerCapacity">Capacity: </label>{{provider.capacity}}</td>
+          <td class="text-right col-sm-2">
+            <label for="phoneNum">Phone No: </label>
+            <br></br>
+            <label for="county">County: </label>
+            <br></br>
+            <label for="city">City: </label>
+          </td>
+          <td class="col-sm-2">{{provider.phoneNumber}}
+            <br></br>
+            {{provider.address.county}}
+            <br></br>
+            {{provider.address.city}}
+          </td>
+          <td class="col-sm-3"><span data-uib-rating="" data-ng-model="provider.rating.ratingId" data-max="5" data-read-only="true"></span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="container col-sm-offset-3 col-sm-9">
+      <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true">
+      </dir-pagination-controls>
+    </div>
+  </div>
+  <hr></hr>
+</div>
+
 </html>

@@ -1,48 +1,19 @@
 /* Styles go here */
-/* body{
-  margin-top:0px;
-  background-color:white;
-  padding: 5px 0 0 0 ;
-}
-.SpringApp-header{
-  margin-top:0px;
-  top:0px;
-  height:100px;
-  background-color:aqua;
+
+.glyphicon-star-empty {
+  font-size: 1.2em;
+  color: grey;
 }
 
-.Spring-Search-Form{
-  margin-top:0px;
-  background-color:red;
+.glyphicon-star {
+  font-size: 1.2em;
+  color: yellow;
 }
 
-.Spring-Search-Result{
-  margin-top:0px;
-  background-color:green;
+form label {
+  color: #3A2B4C;
 }
 
-.SpringApp-footer{
-  margin-top:0px;
-  margin-bottom :0px;
-  bottom:0px;
-  height:100px;
-  background-color:orange;
-} */
-
-.glyphicon-star-empty{
-  font-size:1.2em;
-  color:grey;
-}
-
-.glyphicon-star{
-  font-size:1.2em;
-  color:yellow;
-}
-
-form label{
-	color:#3A2B4C;
-}
-
-table label{
-	color:#3A2B4C;
+table label {
+  color: #3A2B4C;
 }
