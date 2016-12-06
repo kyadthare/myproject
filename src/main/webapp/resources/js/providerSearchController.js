@@ -6,13 +6,13 @@
 
     //function which fetches the search results from the database through HTTP method call 
     $scope.providerSearch = function(searchData) {
-      if ($scope.searchData) {
-    	  
+      if (searchData) {
+
         $scope.invalidData = false;
         $scope.emptyResult = false;
-        
+
         $http.post('searchProvider', searchData).then(function(response) {
-          if (response.data) {
+          if (response.data.length > 0) {
             $scope.getSearchData = response.data;
             $scope.emptyResult = false;
             $scope.sortBy = $scope.sortByFields[0];
@@ -24,7 +24,7 @@
             $scope.emptyResult = true;
           }
         });
-        
+
       } else {
         $scope.invalidData = true;
       }
@@ -49,7 +49,7 @@
     var loadCounty = function(response) {
       $scope.county = response.data;
     };
-    
+
     var tempcity = [];
 
     var loadCity = function(response) {
@@ -72,7 +72,7 @@
     //function which scrolls to the specified section in the page
     function scrollTo(position) {
       var id = $location.hash();
-      
+
       $timeout(function() {
         if (position == "SearchResult") {
           $location.hash('SearchResult');
@@ -82,7 +82,7 @@
         $anchorScroll();
         $location.hash(id);
       });
-      
+
     }
 
     //function which resets the data in the form
@@ -122,17 +122,17 @@
 
     //function which loads the city value based on the county
     $scope.getCity = function(county) {
-      if (county.length > 0) {
-        
-    	  $http.post('loadCity', county).then(function(response) {
-    		  $scope.city = response.data;
-    	  });
-    	  
+      if (county !== null) {
+
+        $http.post('loadCity', county).then(function(response) {
+          $scope.city = response.data;
+        });
+
       } else {
-    	  $scope.city = tempCity;
+        $scope.city = tempCity;
       }
     };
-    
+
   };
 
   //binding of the application to the controller
