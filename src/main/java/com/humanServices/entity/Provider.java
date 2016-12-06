@@ -1,4 +1,4 @@
-package com.humanServices.entities;
+package com.humanServices.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -6,7 +6,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+/**
+ * Entity class for PROVIDER table.
+ * providerId is the primary key column.
+ * 
+ * @author balachandra
+ *
+ */
 @Entity
 @Table(name = "PROVIDER")
 public class Provider {

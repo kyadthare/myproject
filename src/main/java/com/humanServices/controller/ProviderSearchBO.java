@@ -1,47 +1,61 @@
-package com.humanServices.searchBo;
+package com.humanServices.controller;
 
-import com.humanServices.entities.Address;
-import com.humanServices.entities.ProviderType;
-import com.humanServices.entities.QualityStarRating;
+import com.humanServices.entity.Address;
+import com.humanServices.entity.ProviderType;
+import com.humanServices.entity.QualityStarRating;
 
-public class ProviderSearchBo {
-	
+/**
+ * To hold search criteria as an object and process further.
+ * 
+ * @author balachandra
+ *
+ */
+public class ProviderSearchBO {
+
 	private String providerName;
 	private ProviderType providerType;
-	private Address addressCounty;
-	private Address addressCity;
+	private String county;
+	private String city;
 	private QualityStarRating qualityRating;
-	
+
 	public String getProviderName() {
 		return providerName;
 	}
+
 	public void setProviderName(String providerName) {
 		this.providerName = providerName;
 	}
+
 	public ProviderType getProviderType() {
 		return providerType;
 	}
+
 	public void setProviderType(ProviderType providerType) {
 		this.providerType = providerType;
 	}
-	public Address getAddressCounty() {
-		return addressCounty;
+
+	public String getCounty() {
+		return county;
 	}
-	public void setAddressCounty(Address addressCounty) {
-		this.addressCounty = addressCounty;
+
+	public void setCounty(String county) {
+		this.county = county;
 	}
-	public Address getAddressCity() {
-		return addressCity;
-	}
-	public void setAddressCity(Address addressCity) {
-		this.addressCity = addressCity;
-	}
+
 	public QualityStarRating getQualityRating() {
 		return qualityRating;
 	}
+
 	public void setQualityRating(QualityStarRating qualityRating) {
 		this.qualityRating = qualityRating;
 	}
-	
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
 
 }

@@ -1,4 +1,4 @@
-package com.humanServices.entities;
+package com.humanServices.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,7 +6,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-
+/**
+ * Entity class for the PROVIDERTYPE table.
+ * typeId is the primary key column.
+ * 
+ * @author balachandra
+ *
+ */
 
 @Entity
 @Table(name = "PROVIDERTYPE")
