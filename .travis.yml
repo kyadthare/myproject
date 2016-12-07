@@ -4,7 +4,11 @@ branches:
     - master
     
  script:
+<<<<<<< HEAD
+  - mvn clean install
+=======
   mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+>>>>>>> branch 'master' of https://github.com/kyadthare/myproject.git
   
 
 deploy:
