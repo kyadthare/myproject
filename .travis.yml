@@ -1,5 +1,8 @@
 language: java
+<<<<<<< HEAD
 script: mvn clean install -Dtest=ProviderSearchTest test -Dmaven.javadoc.skip=true -B -V
+=======
+>>>>>>> refs/remotes/origin/master
 branches:
   only:
     - master
