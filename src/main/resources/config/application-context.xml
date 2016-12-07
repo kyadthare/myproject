@@ -26,7 +26,7 @@
   
   <!-- enables the property placeholder configuration -->
   <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="locations" value="resources/props/database.properties" />
+    <property name="locations" value="classpath:properties/database.properties" />
   </bean>
   
   <!-- DataSource configuration -->
