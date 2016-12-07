@@ -3,15 +3,16 @@ package com.humanServices.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 /**
- * Entity class for the ADDRESS table. 
- * addressId is the primary key column.
+ * Entity class for the ADDRESS table. addressId is the primary key column.
  * 
  * @author balachandra
  *
  */
+
 @Entity
-@Table(name="ADDRESS")
+@Table(name = "ADDRESS")
 public class Address {
 
 	private int addressId;

@@ -1,6 +1,5 @@
 package com.humanServices.controller;
 
-import com.humanServices.entity.Address;
 import com.humanServices.entity.ProviderType;
 import com.humanServices.entity.QualityStarRating;
 
@@ -10,6 +9,7 @@ import com.humanServices.entity.QualityStarRating;
  * @author balachandra
  *
  */
+
 public class ProviderSearchBO {
 
 	private String providerName;

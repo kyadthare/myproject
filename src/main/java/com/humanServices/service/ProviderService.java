@@ -3,7 +3,6 @@ package com.humanServices.service;
 import java.util.List;
 
 import com.humanServices.controller.ProviderSearchBO;
-import com.humanServices.entity.Address;
 import com.humanServices.entity.Provider;
 import com.humanServices.entity.ProviderType;
 import com.humanServices.entity.QualityStarRating;
@@ -15,6 +14,7 @@ import com.humanServices.entity.QualityStarRating;
  * @author balachandra
  *
  */
+
 public interface ProviderService {
 
 	public List<Provider> searchProviders(ProviderSearchBO searchBo);

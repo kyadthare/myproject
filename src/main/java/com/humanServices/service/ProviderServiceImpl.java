@@ -12,18 +12,20 @@ import com.humanServices.dao.ProviderDAO;
 import com.humanServices.entity.Provider;
 import com.humanServices.entity.ProviderType;
 import com.humanServices.entity.QualityStarRating;
+
 /**
  * Implements the functionalities of ProviderService.
  * 
  * @author balachandra
  *
  */
+
 @Service("providerService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-public class ProviderServiceImpl implements ProviderService{
-	
+public class ProviderServiceImpl implements ProviderService {
+
 	@Autowired
-	 private ProviderDAO providerDao;
+	private ProviderDAO providerDao;
 
 	public List<Provider> searchProviders(ProviderSearchBO searchBo) {
 		return providerDao.searchProviders(searchBo);
@@ -37,12 +39,12 @@ public class ProviderServiceImpl implements ProviderService{
 		return providerDao.getRatings();
 	}
 
-
 	public List<String> getCities(String county) {
 		return providerDao.getCities(county);
 	}
-	
+
 	public List<String> getCounties() {
 		return providerDao.getCounties();
 	}
+
 }
