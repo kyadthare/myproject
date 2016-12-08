@@ -6,7 +6,7 @@
   <div id="formStart">
     <form name="providerAppForm" id="providerAppForm" class="form-horizontal">
       <fieldset>
-        <legend class="text-center legendRes" > Search Child Care Provider </legend>
+        <legend class="text-center legendRes"> Search Child Care Provider </legend>
         <br/>
         <div class="form-group">
           <label for="providerName" class="col-sm-5 control-label">Provider Name</label>
@@ -69,7 +69,7 @@
   <div class="col-sm-offset-4 col-sm-8 text-info" data-ng-show="emptyResult">
     <Strong>No results to display</Strong>
   </div>
-  <div id="SearchResult" data-ng-show="displayResult">
+  <div id="searchResult" data-ng-show="displayResult">
     <!-- div For providing the pagination option -->
     <div class="container-fluid col-sm-12">
       <div class="text-center">
@@ -88,29 +88,26 @@
       <tbody>
         <tr data-dir-paginate="provider in getSearchData | orderBy:sortBy.value:sortSign | itemsPerPage:10" current-page="currentPage">
           <td class="col-sm-5">
-            <span class="fontHeading">{{provider.name}}</span>
+            <span class="fontHeading padSpace">{{provider.name}}</span>
             <br></br>
             <span class="fontSmall">
             <label for="providerType">Type: </label>{{provider.providerType.description}}
             <br></br>
             <label for="providerCapacity">Capacity: </label>{{provider.capacity}}</span></td>
           <td class="text-right col-sm-2">
-            <label for="phoneNum">Phone No: </label>
-            <br></br>
+            <label for="phoneNum"><span class="padSpace">Phone No: </span></label>
             <br></br>
             <label for="county">County: </label>
             <br></br>
             <label for="city">City: </label>
           </td>
-          <td class="col-sm-2">{{provider.phoneNumber}}
+          <td class="col-sm-2"><span class="padSpace">{{provider.phoneNumber}}</span>
             <br></br>
+            <span class="labelAdjust">{{provider.address.county}}</span>
             <br></br>
-            {{provider.address.county}}
-            <br></br>
-            {{provider.address.city}}
+            <span class="labelAdjust">{{provider.address.city}}</span>
           </td>
-          <td class="col-sm-3" style="white-space: nowrap;"><span data-uib-rating="" data-ng-model="provider.rating.ratingId" data-max="5" 
-          data-state-on="'glyphicon-star yellowStar'" data-state-off="'glyphicon-star greyStar'" data-read-only="true"></span></td>
+          <td class="col-sm-3" style="white-space: nowrap;"><span data-uib-rating="" data-ng-model="provider.rating.ratingId" data-max="5" data-state-on="'glyphicon-star yellowStar'" data-state-off="'glyphicon-star greyStar'" data-read-only="true"></span></td>
         </tr>
       </tbody>
     </table>

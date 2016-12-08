@@ -4,22 +4,23 @@
   font-size: 0.8em;
 }
 
-.yellowStar{
-	color: rgb(255,223,0);
+.yellowStar {
+  color: rgb(255, 223, 0);
 }
 
-.greyStar{
-	color: rgb(192,192,192);
+.greyStar {
+  color: rgb(192, 192, 192);
 }
 
-.fontSmall{
-	font-size:0.8em;
+.fontSmall {
+  font-size: 0.8em;
 }
 
-.fontHeading{
-	color:#813D31;
-	font-size:1em;
-	font-weight:bold;
+.fontHeading {
+  color: #813D31;
+  font-size: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 form label {
@@ -30,66 +31,69 @@ table label {
   color: #3A2B4C;
 }
 
-body{
-	font-size:1em;
+body {
+  font-size: 1em;
 }
 
-.imageRes{
-	width:90px;
-	height:60px;
+.imageRes {
+  width: 95px;
+  height: 60px;
 }
 
-.legendRes{
-	color:rgb(155, 187, 88);
-	margin-bottom:10px;
-	font-size:1em;
-	font-weight:bold;
+.legendRes {
+  color: rgb(155, 187, 88);
+  margin-bottom: 10px;
+  font-size: 1em;
+  font-weight: bold;
 }
 
-.outerBox{
-	border: 1px solid #0c8caa; 
-	border-radius: 20px; 
-	width: 95%; 
-	margin: auto; 
-	box-shadow: 0 0 2px #000;
-	padding: 12px;
+.outerBox {
+  border: 1px solid #0c8caa;
+  border-radius: 20px;
+  width: 95%;
+  margin: auto;
+  box-shadow: 0 0 2px #000;
+  padding: 12px;
 }
 
-.button-position{
-	padding-top:15px;		
+.button-position {
+  padding-top: 15px;
 }
 
-hr{
-	border-color: #0c8caa -moz-use-text-color -moz-use-text-color !important;
+.padSpace {
+  display: inline-block;
+  padding-bottom: 10px;
+  margin-bottom: 0px;
+}
+
+.labelAdjust {
+  display: inline-block;
+  margin-top: 5px;
+}
+
+hr {
+  border-color: #0c8caa -moz-use-text-color -moz-use-text-color !important;
 }
 
 @media only screen and (min-width: 768px) {
-	body{
-		font-size:1.3em;
-	}
-	
-	.imageRes{
-		width:170px;
-		height:107px;
-	}
-	
-	.legendRes{
-		color:rgb(155, 187, 88);
-		margin-bottom:20px;
-		font-size:21px;
-		font-weight:bold;
-	}
-	.fontSmall{
-		font-size:1em;
-	}
-	
-	.fontHeading{
-		color:#813D31;
-		font-size:1em;
-		font-weight:bold;
-	}
-	
-	.glyphicon-star {
-	  font-size: 1.5em;
-	}
+  body {
+    font-size: 1.3em;
+  }
+  .imageRes {
+    width: 170px;
+    height: 107px;
+  }
+  .legendRes {
+    margin-bottom: 20px;
+    font-size: 21px;
+  }
+  .fontSmall {
+    font-size: 1em;
+  }
+  .fontHeading {
+    font-size: 1em;
+  }
+  .glyphicon-star {
+    font-size: 1.5em;
+  }
 }
