@@ -1,4 +1,6 @@
 language: java
+services:
+  - postgresql
 script: mvn clean install -Dtest=ProviderSearchTest test -Dmaven.javadoc.skip=true -B -V
 branches:
   only:
