@@ -4,12 +4,12 @@ services:
 addons:
   postgresql: "9.4"
 before_script:
-  - psql -c 'create database careProvider;' -U postgres
-  - psql -U postgres -q -d careProvider -f src/main/sql/DB_SCHEMA.sql
-  - psql -U postgres -q -d careProvider -f src/main/sql/ADDRESS.sql
-  - psql -U postgres -q -d careProvider -f src/main/sql/PROVIDER.sql
-  - psql -U postgres -q -d careProvider -f src/main/sql/PROVIDERTYPE.sql
-  - psql -U postgres -q -d careProvider -f src/main/sql/QUALITYSTARRATING.sql
+  - psql -c 'create database hD3YjEnPlBhyyR9hwbVX_BMa5k4rmH0G;' -U postgres
+  - psql -U postgres -q -d hD3YjEnPlBhyyR9hwbVX_BMa5k4rmH0G -f src/main/sql/DB_SCHEMA.sql
+  - psql -U postgres -q -d hD3YjEnPlBhyyR9hwbVX_BMa5k4rmH0G -f src/main/sql/ADDRESS.sql
+  - psql -U postgres -q -d hD3YjEnPlBhyyR9hwbVX_BMa5k4rmH0G -f src/main/sql/PROVIDER.sql
+  - psql -U postgres -q -d hD3YjEnPlBhyyR9hwbVX_BMa5k4rmH0G -f src/main/sql/PROVIDERTYPE.sql
+  - psql -U postgres -q -d hD3YjEnPlBhyyR9hwbVX_BMa5k4rmH0G -f src/main/sql/QUALITYSTARRATING.sql
 script: mvn clean install -Dtest=ProviderSearchTest test -Dmaven.javadoc.skip=true -B -V
 branches:
   only:
