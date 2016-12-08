@@ -84,10 +84,10 @@
     </dependency>
     <!-- postGREsql Driver -->
     <dependency>
-      <groupId>org.postgresql</groupId>
+      <groupId>postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>LATEST</version>
-    </dependency> 
+      <version>9.1-901.jdbc4</version>
+    </dependency>
     <dependency>
       <groupId>dom4j</groupId>
       <artifactId>dom4j</artifactId>
