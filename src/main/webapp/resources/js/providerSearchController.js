@@ -6,29 +6,55 @@
 
     //function which fetches the search results from the database through HTTP method call 
     $scope.providerSearch = function(searchData) {
-      if (searchData) {
-
-        $scope.invalidData = false;
-        $scope.emptyResult = false;
-
-        $http.post('searchProvider', searchData).then(function(response) {
+      validateForm();
+      $scope.displayResult = false;
+      $scope.emptyResult = false;
+      if (!($scope.invalidData)) {
+        $http.post('searchProvider', $scope.searchData).then(function(response) {
           if (response.data.length > 0) {
             $scope.getSearchData = response.data;
-            $scope.emptyResult = false;
             $scope.sortBy = $scope.sortByFields[0];
             $scope.sortSign = false;
             $scope.displayResult = true;
             $scope.currentPage = 1;
-            scrollTo('SearchResult');
+            scrollTo('searchResult');
           } else {
             $scope.emptyResult = true;
           }
         });
 
-      } else {
-        $scope.invalidData = true;
       }
     };
+
+    //function to validate the form data
+    function validateForm() {
+      $scope.invalidData = true;
+      if ($scope.searchData) {
+        var formValues = [];
+        if ($scope.searchData.providerName) {
+          formValues.push($scope.searchData.providerName);
+        }
+        if ($scope.searchData.providerType) {
+          formValues.push($scope.searchData.providerType.description);
+        }
+        if ($scope.searchData.city) {
+          formValues.push($scope.searchData.city);
+        }
+        if ($scope.searchData.county) {
+          formValues.push($scope.searchData.county);
+        }
+        if ($scope.searchData.qualityRating) {
+          formValues.push($scope.searchData.qualityRating.ratingId);
+        }
+        for (var i = 0; i < formValues.length; i++) {
+          if (formValues[i].length > 0) {
+            $scope.invalidData = false;
+          }
+        }
+      }
+    }
+
+
 
     //function which sorts the search result in asc or desc order
     $scope.changeSortSign = function() {
@@ -65,25 +91,16 @@
       $scope.errorReason = "Failed to load some of the search data";
     };
 
-    $scope.scrollTo = function(position) {
-      scrollTo(position);
-    };
-
     //function which scrolls to the specified section in the page
-    function scrollTo(position) {
+    $scope.scrollTo = function(position) {
       var id = $location.hash();
 
       $timeout(function() {
-        if (position == "SearchResult") {
-          $location.hash('SearchResult');
-        } else {
-          $location.hash('header');
-        }
+        $location.hash('searchResult');
         $anchorScroll();
         $location.hash(id);
       });
-
-    }
+    };
 
     //function which resets the data in the form
     $scope.resetData = function() {

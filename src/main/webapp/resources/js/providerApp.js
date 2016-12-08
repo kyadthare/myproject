@@ -6,7 +6,22 @@ providerApp.config(function($routeProvider) {
 
   $routeProvider.when("/", {
     templateUrl: "providers",
-    Controller: "providerSearchController"
-  })
-  
+    controller: "providerSearchController"
+  });
+
+});
+
+providerApp.controller("indexController", function($scope, $location, $timeout, $anchorScroll) {
+
+  //function which scrolls to the specified section in the page
+  $scope.scrollTo = function() {
+    var id = $location.hash();
+
+    $timeout(function() {
+      $location.hash('header');
+      $anchorScroll();
+      $location.hash(id);
+    });
+
+  };
 });
