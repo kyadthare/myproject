@@ -4,9 +4,9 @@ addons:
 before_script:
   - psql -U postgres -d postgres -a -f ./src/main/sql/DB_SCHEMA.sql
   - psql -U postgres -d postgres -a -f ./src/main/sql/ADDRESS.sql
-  - psql -U postgres -d postgres -a -f ./src/main/sql/PROVIDER.sql
   - psql -U postgres -d postgres -a -f ./src/main/sql/PROVIDERTYPE.sql
   - psql -U postgres -d postgres -a -f ./src/main/sql/QUALITYSTARRATING.sql
+  - psql -U postgres -d postgres -a -f ./src/main/sql/PROVIDER.sql
 script: mvn clean install -Dtest=ProviderSearchTest test -Dmaven.javadoc.skip=true -B -V
 branches:
   only:
