@@ -44,7 +44,7 @@
           formValues.push($scope.searchData.county);
         }
         if ($scope.searchData.qualityRating) {
-          formValues.push($scope.searchData.qualityRating.ratingId);
+          formValues.push($scope.searchData.qualityRating.description);
         }
         for (var i = 0; i < formValues.length; i++) {
           if (formValues[i].length > 0) {
@@ -92,7 +92,7 @@
     };
 
     //function which scrolls to the specified section in the page
-    $scope.scrollTo = function(position) {
+    function scrollTo(position) {
       var id = $location.hash();
 
       $timeout(function() {

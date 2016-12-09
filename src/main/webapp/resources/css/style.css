@@ -53,7 +53,7 @@ body {
   width: 95%;
   margin: auto;
   box-shadow: 0 0 2px #000;
-  padding: 12px;
+  padding: 1px;
 }
 
 .button-position {
@@ -73,6 +73,22 @@ body {
 
 hr {
   border-color: #0c8caa -moz-use-text-color -moz-use-text-color !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .pagination > li > a {
+    padding: 2px 4px;
+  }
+  .table > tbody > tr > td {
+    padding: 2px;
+  }
+  .btn-sm {
+    font-size: 7px;
+  }
+  .container-fluid {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -95,5 +111,8 @@ hr {
   }
   .glyphicon-star {
     font-size: 1.5em;
+  }
+  .outerBox {
+    padding: 12px;
   }
 }
