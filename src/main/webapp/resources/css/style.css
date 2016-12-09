@@ -1,5 +1,9 @@
 /* Styles go here */
 
+.header{
+	background-color: black;
+}
+
 .glyphicon-star {
   font-size: 0.8em;
 }
@@ -73,6 +77,13 @@ body {
 
 hr {
   border-color: #0c8caa -moz-use-text-color -moz-use-text-color !important;
+}
+
+@media only screen and (max-width: 480px) {
+  .imageRes {
+    width: 75px;
+    height: 47px;
+  }
 }
 
 @media only screen and (max-width: 768px) {
