@@ -107,6 +107,7 @@
       $scope.searchData = null;
       $scope.getSearchData = null;
       $scope.invalidData = false;
+      $scope.city = tempCity;
       $scope.emptyResult = false;
       $scope.displayResult = false;
     };
