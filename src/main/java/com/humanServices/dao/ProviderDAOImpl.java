@@ -40,7 +40,7 @@ public class ProviderDAOImpl implements ProviderDAO {
 		createCriteria.createAlias("provider.rating", "rating");
 
 		if (searchBO.getProviderName() != null && !searchBO.getProviderName().trim().equals("")) {
-			createCriteria.add(Restrictions.like("provider.name", "%"+ searchBO.getProviderName() + "%"));
+			createCriteria.add(Restrictions.like("provider.name", "%"+ searchBO.getProviderName() + "%").ignoreCase());
 		}
 
 		if (null != searchBO.getProviderType()) {
@@ -48,11 +48,11 @@ public class ProviderDAOImpl implements ProviderDAO {
 		}
 
 		if (null != searchBO.getCounty()) {
-			createCriteria.add(Restrictions.eq("address.county", searchBO.getCounty()));
+			createCriteria.add(Restrictions.eq("address.county", searchBO.getCounty()).ignoreCase());
 		}
 
 		if (null != searchBO.getCity()) {
-			createCriteria.add(Restrictions.eq("address.city", searchBO.getCity()));
+			createCriteria.add(Restrictions.eq("address.city", searchBO.getCity()).ignoreCase());
 		}
 
 		if (null != searchBO.getQualityRating()) {
