@@ -10,6 +10,7 @@ footer{
 
 .mapPad{
   padding-top: 6px;
+  display: block;
 }
 
 #transWindow {

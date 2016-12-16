@@ -5,7 +5,7 @@
   var providerSearchController = function($scope, $http, $location, $anchorScroll, $timeout) {
 
     var mapCenter = {
-      center: new google.maps.LatLng(36.0078, -98.0929),
+      center: new google.maps.LatLng(32.3547, -89.3985),
       zoom: 6,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -24,8 +24,6 @@
     	  setTransWindowVisiblitily('visible');
         $http.post('searchProvider', $scope.searchData).then(function(response) {
           if (response.data.length > 0) {
-        	map.setCenter(mapCenter.center);
-        	map.setZoom(mapCenter.zoom);
             $scope.getSearchData = response.data;
             createMarker($scope.getSearchData);
             $scope.sortBy = $scope.sortByFields[0];
@@ -132,6 +130,7 @@
       $scope.showMap = !$scope.showMap;
       $timeout(function() {
         google.maps.event.trigger(map, 'resize');
+        map.setCenter(mapCenter.center);
       });
     };
 

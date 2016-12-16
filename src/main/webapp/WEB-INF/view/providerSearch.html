@@ -5,7 +5,7 @@
   <!-- div for Search Form -->
   <div id="formStart">
     <div id="transWindow">
-      <img class="image-responsive" src="resources/images/loading.gif"></img>
+      <img class="img-responsive center-block" src="resources/images/loading.gif"></img>
     </div> 
     <form name="providerAppForm" id="providerAppForm" class="form-horizontal">
       <fieldset>
@@ -91,13 +91,13 @@
         <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true">
         </dir-pagination-controls>
       </div>
-      <div class="col-xs-6">
+      <div class="col-xs-4">
         <button id="viewMap" class="btn btn-default btn-sm" data-ng-click="toggleShowMap()">
           <img class="imageRes" src="resources/images/Google-Maps-icon.png" alt="Show/Hide Map"></img>
           <a href="">Show/Hide Map</a>
         </button>
       </div>  
-      <div class="text-right col-xs-6">
+      <div class="text-right col-xs-8">
         <label for="sortBy">SortBy:</label>
         <select id="sortBy" name="sortBy" data-ng-model="sortBy" data-ng-change="sortBySearch(sortBy)" data-ng-options="sortByField.name for sortByField in sortByFields"></select>
         <button id="sortOrder" class="btn btn-default btn-sm" data-ng-click="changeSortSign()">
