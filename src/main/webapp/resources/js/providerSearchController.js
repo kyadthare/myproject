@@ -24,6 +24,8 @@
     	  setTransWindowVisiblitily('visible');
         $http.post('searchProvider', $scope.searchData).then(function(response) {
           if (response.data.length > 0) {
+        	map.setCenter(mapCenter.center);
+        	map.setZoom(mapCenter.zoom);
             $scope.getSearchData = response.data;
             createMarker($scope.getSearchData);
             $scope.sortBy = $scope.sortByFields[0];
@@ -58,12 +60,12 @@
       });
 
       var infowindow = new google.maps.InfoWindow({
-        content: '<div class="fontHeading padSpace">' + data.name +
-          '</div><div class="fontSmall"><strong>Type:</strong>' + data.providerType.description +
-          '<br/><strong>County:</strong>' + data.address.county +
+        content: '<div class="fontHeading">' + data.name +
+          '</div><div class="fontSmall mapPad"><strong>Type:</strong>' + data.providerType.description +
+          '<br/><span class="mapPad"><strong>County:</strong>' + data.address.county +
           '<br/><strong>City:</strong>' + data.address.city +
-          '<br/><strong>Capacity:</strong>' + data.capacity +
-          '<br/><strong>Phone#:</strong>' + data.phoneNumber + '</div>'
+          '<br/></span><span class="mapPad"><strong>Capacity:</strong>' + data.capacity +
+          '<br/><strong>Phone#:</strong>' + data.phoneNumber + '</span></div>'
       });
 
       marker.addListener('click', function() {

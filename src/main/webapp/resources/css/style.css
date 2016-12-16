@@ -4,6 +4,14 @@ footer{
   height: 50px;
 }
 
+.text-warning{
+  color:#FF5200;
+}
+
+.mapPad{
+  padding-top: 6px;
+}
+
 #transWindow {
   visibility: hidden;
   position: absolute;
