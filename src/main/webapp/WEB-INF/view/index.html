@@ -12,6 +12,7 @@
   <script src="resources/js/lib/angular-ui-bootstrap.js"></script>
   <link rel="stylesheet" href="resources/css/style.css" />
   <script src="resources/js/lib/dirPagination.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1nNVWprFFokQaeFlxjq4mZtHk2cZKFIM"></script>
   <script src="resources/js/providerApp.js"></script>
   <script src="resources/js/providerSearchController.js"></script>
 
@@ -19,8 +20,13 @@
 
 <body class="container-fluid" data-ng-controller="indexController">
   <header id="header">
-    <img src="resources/images/IBM_LOGO.jpg" class="img-responsive imageRes" alt="IBM_LOGO" />
+    <div class="headlogo">
+      <div class="logo">
+        <a href="" alt="IBM Home Page Link" aria-label="IBM Home Page Link"></a>
+      </div>
+    </div>
   </header>
+
   <hr/>
   <!-- div which displays the view to the application based on the routing configuration -->
   <div data-ng-view="" class="outerBox"></div>

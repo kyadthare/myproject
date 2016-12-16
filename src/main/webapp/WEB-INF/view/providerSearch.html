@@ -4,6 +4,9 @@
 <div class="container-fluid">
   <!-- div for Search Form -->
   <div id="formStart">
+    <div id="transWindow">
+      <img class="image-responsive" src="resources/images/loading.gif"></img>
+    </div> 
     <form name="providerAppForm" id="providerAppForm" class="form-horizontal">
       <fieldset>
         <legend class="text-center legendRes"> Search Child Care Provider </legend>
@@ -40,7 +43,13 @@
               <option value="">--- Select ---</option>
             </select>
           </div>
-          <div class="col-sm-4"></div>
+          <label for="limit" class="col-sm-1 control-label">Within</label>
+          <div class="col-sm-2">
+            <select class="form-control" data-ng-model="searchData.geoRadius" id="radius" name="radius" data-ng-options="geoRadius.description for geoRadius in geoRadius">
+              <option value="">--Select--</option>
+            </select>
+          </div>
+          <div class="col-sm-1"></div>
         </div>
         <div class="form-group">
           <label for="qualityRating" class="col-sm-5 control-label">Quality Star Rating</label>
@@ -61,6 +70,9 @@
         <div class="col-sm-offset-4 col-sm-8 text-danger" data-ng-show="invalidData">
           <Strong>Please specify at least one search criteria</Strong>
         </div>
+        <div class="col-sm-offset-4 col-sm-8 text-warning" data-ng-show="missingData">
+          <Strong>Please specify city if performing search based on vicinity/distance</Strong>
+        </div>
       </fieldset>
     </form>
   </div>
@@ -70,13 +82,22 @@
     <Strong>No results to display</Strong>
   </div>
   <div id="searchResult" data-ng-show="displayResult">
+    <div id="mapArea">
+  	  <div id="googleMap" data-ng-show="showMap"></div>
+    </div>
     <!-- div For providing the pagination option -->
-    <div class="container-fluid col-sm-12">
+    <div class="container-fluid">
       <div class="text-center">
         <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true">
         </dir-pagination-controls>
       </div>
-      <div class="text-right">
+      <div class="col-xs-6">
+        <button id="viewMap" class="btn btn-default btn-sm" data-ng-click="toggleShowMap()">
+          <img class="imageRes" src="resources/images/Google-Maps-icon.png" alt="Show/Hide Map"></img>
+          <a href="">Show/Hide Map</a>
+        </button>
+      </div>  
+      <div class="text-right col-xs-6">
         <label for="sortBy">SortBy:</label>
         <select id="sortBy" name="sortBy" data-ng-model="sortBy" data-ng-change="sortBySearch(sortBy)" data-ng-options="sortByField.name for sortByField in sortByFields"></select>
         <button id="sortOrder" class="btn btn-default btn-sm" data-ng-click="changeSortSign()">
@@ -107,7 +128,10 @@
             <br></br>
             <span class="labelAdjust">{{provider.address.city}}</span>
           </td>
-          <td class="col-sm-3" style="white-space: nowrap;"><span data-uib-rating="" data-ng-model="provider.rating.ratingId" data-max="5" data-state-on="'glyphicon-star yellowStar'" data-state-off="'glyphicon-star greyStar'" data-read-only="true"></span></td>
+          <td class="col-sm-3" style="white-space: nowrap;">
+          	<span data-uib-rating="" data-ng-model="provider.rating.ratingId" data-max="5" data-state-on="'glyphicon-star yellowStar'" data-state-off="'glyphicon-star greyStar'" data-read-only="true"></span>
+            <br></br><span data-ng-show="showDistance" >{{provider.address.distance | number:1}} miles away</span>
+          </td>
         </tr>
       </tbody>
     </table>
