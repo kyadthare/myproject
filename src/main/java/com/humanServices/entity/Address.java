@@ -3,6 +3,7 @@ package com.humanServices.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Entity class for the ADDRESS table. addressId is the primary key column.
@@ -20,6 +21,9 @@ public class Address {
 	private String county;
 	private String city;
 	private int zipcode;
+	private double latitude;
+	private double longitude;
+	private double distance;
 
 	@Id
 	public int getAddressId() {
@@ -61,5 +65,32 @@ public class Address {
 	public void setZipcode(int zipcode) {
 		this.zipcode = zipcode;
 	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	@Transient
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+	
+	
 
 }

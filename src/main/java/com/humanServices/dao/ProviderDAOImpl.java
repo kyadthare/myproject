@@ -51,7 +51,7 @@ public class ProviderDAOImpl implements ProviderDAO {
 			createCriteria.add(Restrictions.eq("address.county", searchBO.getCounty()).ignoreCase());
 		}
 
-		if (null != searchBO.getCity()) {
+		if (null != searchBO.getCity() && null == searchBO.getGeoRadius()) {
 			createCriteria.add(Restrictions.eq("address.city", searchBO.getCity()).ignoreCase());
 		}
 

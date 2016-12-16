@@ -1,7 +1,10 @@
 package com.humanServices.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,14 +91,15 @@ public class ProviderSearchTest {
 		ProviderType providerType = new ProviderType();
 
 		providerType.setDescription("slot Contractor");
-		providerType.setTypeId(new Long(1231));
+		providerType.setTypeId(new Long(2));
 
 		providerSearchBo.setProviderType(providerType);
 
 		List<Provider> providerList = providerController
 				.getProviderList(providerSearchBo);
 
-		assertNotNull(providerList);
+		assertFalse("slot Contractor", providerList.get(1).getProviderType()
+				.equals("slot Contractor"));
 
 	}
 
@@ -104,12 +108,21 @@ public class ProviderSearchTest {
 
 		ProviderSearchBO providerSearchBo = new ProviderSearchBO();
 
-		providerSearchBo.setCity("Bangalore");
+		providerSearchBo.setCity("WALLS");
 
-		List<Provider> providerList = providerController
-				.getProviderList(providerSearchBo);
+		try
 
-		assertNotNull(providerList);
+		{
+			List<Provider> providerList = providerController
+					.getProviderList(providerSearchBo);
+
+			assertEquals(8, providerList.size());
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
 
 	}
 
@@ -120,15 +133,16 @@ public class ProviderSearchTest {
 
 		QualityStarRating qualityRating = new QualityStarRating();
 
-		qualityRating.setDescription("3");
-		qualityRating.setRatingId(2312);
+		qualityRating.setDescription("Not Rated");
+		qualityRating.setRatingId(0);
 
 		providerSearchBo.setQualityRating(qualityRating);
 
 		List<Provider> providerList = providerController
 				.getProviderList(providerSearchBo);
 
-		assertNotNull(providerList);
+		assertTrue(providerList.get(1).getRating().getDescription()
+				.equals("Not Rated"));
 
 	}
 
@@ -137,11 +151,11 @@ public class ProviderSearchTest {
 
 		ProviderSearchBO providerSearchBo = new ProviderSearchBO();
 
-		providerSearchBo.setCounty("KA");
+		providerSearchBo.setCounty("DESOTO");
 		List<Provider> providerList = providerController
 				.getProviderList(providerSearchBo);
 
-		assertNotNull(providerList);
+		assertEquals("DESOTO", providerList.get(0).getAddress().getCounty());
 
 	}
 
@@ -149,12 +163,12 @@ public class ProviderSearchTest {
 	public void testGetProviderList5() throws Exception {
 
 		ProviderSearchBO providerSearchBo = new ProviderSearchBO();
-		providerSearchBo.setProviderName("ProviderTest");
+		providerSearchBo.setProviderName("Irma");
 
 		List<Provider> providerList = providerController
 				.getProviderList(providerSearchBo);
 
-		assertNotNull(providerList);
+		assertEquals(10, providerList.size());
 
 	}
 
@@ -162,14 +176,14 @@ public class ProviderSearchTest {
 	public void testGetProviderList6() throws Exception {
 
 		ProviderSearchBO providerSearchBo = new ProviderSearchBO();
-		providerSearchBo.setProviderName("ProviderTest12");
+		providerSearchBo.setProviderName("A Child's View");
 
-		providerSearchBo.setCounty("MP");
+		providerSearchBo.setCounty("DESOTO");
 
 		List<Provider> providerList = providerController
 				.getProviderList(providerSearchBo);
 
-		assertNotNull(providerList);
+		assertEquals("OLIVE BRANCH", providerList.get(0).getAddress().getCity());
 
 	}
 
@@ -177,19 +191,29 @@ public class ProviderSearchTest {
 	public void testGetProviderList7() throws Exception {
 
 		ProviderSearchBO providerSearchBo = new ProviderSearchBO();
-		providerSearchBo.setProviderName("ProviderTest45");
+		providerSearchBo.setProviderName("Alma Bernal");
 
 		QualityStarRating qualityRating = new QualityStarRating();
 
-		qualityRating.setDescription("QuallityRatingDesc12");
-		qualityRating.setRatingId(2);
+		qualityRating.setDescription("Not Rated");
+		qualityRating.setRatingId(0);
 
 		providerSearchBo.setQualityRating(qualityRating);
 
-		List<Provider> providerList = providerController
-				.getProviderList(providerSearchBo);
+		try {
 
-		assertNotNull(providerList);
+			List<Provider> providerList = providerController
+					.getProviderList(providerSearchBo);
+			if (providerList.size() >= 1) {
+
+				assertEquals("LAUDERDALE", providerList.get(0).getAddress()
+						.getCounty());
+			} else {
+				assertNull(providerList);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -197,13 +221,22 @@ public class ProviderSearchTest {
 	public void testGetProviderList8() throws Exception {
 
 		ProviderSearchBO providerSearchBo = new ProviderSearchBO();
-		providerSearchBo.setProviderName("ProviderName");
+		providerSearchBo.setProviderName("Angelica Garza");
+		providerSearchBo.setCity("JACKSON");
+		try {
+			List<Provider> providerList = providerController
+					.getProviderList(providerSearchBo);
+			if (providerList.size() >= 1) {
+				assertEquals("Angelica Garza", providerList.get(0).getName());
+			} else {
+				assertNull(providerList);
+			}
 
-		providerSearchBo.setCity("MH");
-		List<Provider> providerList = providerController
-				.getProviderList(providerSearchBo);
+		}
 
-		assertNotNull(providerList);
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -211,19 +244,30 @@ public class ProviderSearchTest {
 	public void testGetProviderList9() throws Exception {
 
 		ProviderSearchBO providerSearchBo = new ProviderSearchBO();
-		providerSearchBo.setProviderName("ProviderName_test");
+		providerSearchBo.setProviderName("Ana Maria Salomon");
 
 		ProviderType providerType = new ProviderType();
 
-		providerType.setDescription("GROUND");
-		providerType.setTypeId(new Long(1231));
+		providerType.setDescription("Group Home");
+		providerType.setTypeId(new Long(3));
 
 		providerSearchBo.setProviderType(providerType);
 
-		List<Provider> providerList = providerController
-				.getProviderList(providerSearchBo);
+		try {
 
-		assertNotNull(providerList);
+			List<Provider> providerList = providerController
+					.getProviderList(providerSearchBo);
+			if (providerList.size() >= 1) {
+				assertEquals(new Long(26), providerList.get(0).getCapacity());
+			} else {
+				assertNull(providerList);
+			}
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -231,21 +275,32 @@ public class ProviderSearchTest {
 	public void testGetProviderList10() throws Exception {
 
 		ProviderSearchBO providerSearchBo = new ProviderSearchBO();
-		providerSearchBo.setProviderName("ProviderName");
+		providerSearchBo.setProviderName("Angelica Garza");
 
 		ProviderType providerType = new ProviderType();
 
-		providerType.setDescription("GroupHome");
-		providerType.setTypeId(new Long(1231));
+		providerType.setDescription("Relative Out-of-Home");
+		providerType.setTypeId(new Long(8));
 
 		providerSearchBo.setProviderType(providerType);
 
-		providerSearchBo.setCity("Bhopal");
+		providerSearchBo.setCity("JACKSON");
 
-		List<Provider> providerList = providerController
-				.getProviderList(providerSearchBo);
+		try {
 
-		assertNotNull(providerList);
+			List<Provider> providerList = providerController
+					.getProviderList(providerSearchBo);
+			if (providerList.size() >= 1) {
+				assertEquals("Relative Out-of-Home", providerList.get(0)
+						.getProviderType().getDescription());
+			} else {
+				assertNull(providerList);
+			}
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -253,26 +308,37 @@ public class ProviderSearchTest {
 	public void testGetProviderList11() throws Exception {
 
 		ProviderSearchBO providerSearchBo = new ProviderSearchBO();
-		providerSearchBo.setProviderName("YangKi");
+		providerSearchBo.setProviderName("Angelia White");
 
 		ProviderType providerType = new ProviderType();
 
-		providerType.setDescription("Center");
-		providerType.setTypeId(new Long(1231));
+		providerType.setDescription("Non-Relative Out-Of-Home");
+		providerType.setTypeId(new Long(8));
 
 		providerSearchBo.setProviderType(providerType);
 
 		QualityStarRating qualityRating = new QualityStarRating();
 
-		qualityRating.setDescription("QuallityRatingDesc");
-		qualityRating.setRatingId(7);
+		qualityRating.setDescription("Not Rated");
+		qualityRating.setRatingId(2);
 
 		providerSearchBo.setQualityRating(qualityRating);
 
-		List<Provider> providerList = providerController
-				.getProviderList(providerSearchBo);
+		try {
 
-		assertNotNull(providerList);
+			List<Provider> providerList = providerController
+					.getProviderList(providerSearchBo);
+			if (providerList.size() >= 1) {
+				assertTrue(providerList.get(0).getRating().getDescription()
+						.equals("Not Rated"));
+			} else {
+				assertNotNull(providerList);
+			}
+		} catch (Exception e)
+
+		{
+			e.printStackTrace();
+		}
 
 	}
 
@@ -280,21 +346,33 @@ public class ProviderSearchTest {
 	public void testGetProviderList12() throws Exception {
 
 		ProviderSearchBO providerSearchBo = new ProviderSearchBO();
-		providerSearchBo.setProviderName("ProviderNameYZ");
+		providerSearchBo
+				.setProviderName("A Step Above Preparatory Academy Inc.");
 
 		ProviderType providerType = new ProviderType();
 
-		providerType.setDescription("relativeInhome");
-		providerType.setTypeId(new Long(1231));
+		providerType.setDescription("Center");
+		providerType.setTypeId(new Long(4));
 
 		providerSearchBo.setProviderType(providerType);
 
-		providerSearchBo.setCounty("HP");
+		providerSearchBo.setCounty("FORREST");
 
-		List<Provider> providerList = providerController
-				.getProviderList(providerSearchBo);
+		try {
 
-		assertNotNull(providerList);
+			List<Provider> providerList = providerController
+					.getProviderList(providerSearchBo);
+
+			if (providerList.size() >= 1) {
+				assertEquals("FORREST", providerList.get(0).getAddress()
+						.getCounty());
+			} else {
+				assertNotNull(providerList);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -302,28 +380,48 @@ public class ProviderSearchTest {
 	public void testGetProviderList13() throws Exception {
 
 		ProviderSearchBO providerSearchBo = new ProviderSearchBO();
-		providerSearchBo.setProviderName("ProviderName");
+		providerSearchBo
+				.setProviderName("Boone Elementary After School Program");
 
 		ProviderType providerType = new ProviderType();
 
-		providerType.setDescription("RelativeOutOfhome");
-		providerType.setTypeId(new Long(1231));
+		providerType.setDescription("Center");
+		providerType.setTypeId(new Long(4));
 
 		providerSearchBo.setProviderType(providerType);
 
-		providerSearchBo.setCounty("UP");
+		providerSearchBo.setCounty("DE KALB");
 
 		QualityStarRating qualityRating = new QualityStarRating();
 
 		qualityRating.setDescription("QuallityRatingDesc123");
-		qualityRating.setRatingId(8);
+		qualityRating.setRatingId(5);
 
 		providerSearchBo.setQualityRating(qualityRating);
 
-		List<Provider> providerList = providerController
-				.getProviderList(providerSearchBo);
+		try {
+			List<Provider> providerList = providerController
+					.getProviderList(providerSearchBo);
+			if (providerList.size() >= 1) {
+				assertEquals(
+						"Boone Elementary After School Program",
+						providerList
+								.get(0)
+								.getName()
+								.equals("Boone Elementary After School Program"));
+			}
 
-		assertNotNull(providerList);
+			else {
+				assertNotNull(providerList);
+
+			}
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+
+		}
 
 	}
 
@@ -331,23 +429,32 @@ public class ProviderSearchTest {
 	public void testGetProviderList14() throws Exception {
 
 		ProviderSearchBO providerSearchBo = new ProviderSearchBO();
-		providerSearchBo.setProviderName("ProviderName");
+		providerSearchBo.setProviderName("Abigail Burross");
 
 		ProviderType providerType = new ProviderType();
 
-		providerType.setDescription("NonRelativeInHome");
-		providerType.setTypeId(new Long(1231));
+		providerType.setDescription("Non-Relative Out-Of-Home");
+		providerType.setTypeId(new Long(7));
 
 		providerSearchBo.setProviderType(providerType);
 
-		providerSearchBo.setCounty("BJ");
+		providerSearchBo.setCounty("DESOTO");
 
-		providerSearchBo.setCity("Bijnor");
+		providerSearchBo.setCity("WALLS");
 
-		List<Provider> providerList = providerController
-				.getProviderList(providerSearchBo);
+		try {
 
-		assertNotNull(providerList);
+			List<Provider> providerList = providerController
+					.getProviderList(providerSearchBo);
+			if (providerList.size() >= 1) {
+				assertEquals("WALLS", providerList.get(0).getAddress()
+						.getCity());
+			} else {
+				assertNotNull(providerList);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -358,25 +465,32 @@ public class ProviderSearchTest {
 
 		ProviderType providerType = new ProviderType();
 
-		providerType.setDescription("NOnRelativeOutOfHome");
-		providerType.setTypeId(new Long(1231));
+		providerType.setDescription("Group Home");
+		providerType.setTypeId(new Long(3));
 
 		providerSearchBo.setProviderType(providerType);
 
-		providerSearchBo.setCounty("TN");
+		providerSearchBo.setCounty("LINCOLN");
 
-		providerSearchBo.setCity("Chennai");
+		providerSearchBo.setCity("BROOKHAVEN");
 		QualityStarRating qualityRating = new QualityStarRating();
 
 		qualityRating.setDescription("QuallityRatingDesc");
-		qualityRating.setRatingId(2);
+		qualityRating.setRatingId(3);
 
 		providerSearchBo.setQualityRating(qualityRating);
+		try {
+			List<Provider> providerList = providerController
+					.getProviderList(providerSearchBo);
+			if (providerList.size() >= 1) {
+				assertEquals(3, providerList.get(0).getRating().getRatingId());
+			} else {
+				assertNotNull(providerList);
 
-		List<Provider> providerList = providerController
-				.getProviderList(providerSearchBo);
-
-		assertNotNull(providerList);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -387,19 +501,29 @@ public class ProviderSearchTest {
 
 		ProviderType providerType = new ProviderType();
 
-		providerType.setDescription("NOnRelativeOutOfHome");
-		providerType.setTypeId(new Long(1231));
+		providerType.setDescription("Slot Contractor");
+		providerType.setTypeId(new Long(2));
 
 		providerSearchBo.setProviderType(providerType);
 
-		providerSearchBo.setCounty("MH");
+		providerSearchBo.setCounty("LEE");
 
-		providerSearchBo.setCity("Mumbai");
+		providerSearchBo.setCity("TUPELO");
 
-		List<Provider> providerList = providerController
-				.getProviderList(providerSearchBo);
+		try {
 
-		assertNotNull(providerList);
+			List<Provider> providerList = providerController
+					.getProviderList(providerSearchBo);
+
+			if (providerList.size() >= 1) {
+				assertEquals("Slot Contractor", providerList.get(0)
+						.getProviderType().getDescription());
+			} else {
+				assertNotNull(providerList);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 

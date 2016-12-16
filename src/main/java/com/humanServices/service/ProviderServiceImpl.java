@@ -1,14 +1,24 @@
 package com.humanServices.service;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import com.humanServices.controller.ProviderSearchBO;
 import com.humanServices.dao.ProviderDAO;
+import com.humanServices.entity.Address;
 import com.humanServices.entity.Provider;
 import com.humanServices.entity.ProviderType;
 import com.humanServices.entity.QualityStarRating;
@@ -28,7 +38,12 @@ public class ProviderServiceImpl implements ProviderService {
 	private ProviderDAO providerDao;
 
 	public List<Provider> searchProviders(ProviderSearchBO searchBo) {
-		return providerDao.searchProviders(searchBo);
+		List<Provider> providerList = providerDao.searchProviders(searchBo);
+		if(null !=searchBo.getGeoRadius()){
+			Map<String, Double> CitiesInVicinity = listCitiesInVicinity(searchBo, providerList);
+			providerList = getProvidersInVicinity(providerList,CitiesInVicinity);
+		}
+		return providerList;
 	}
 
 	public List<ProviderType> getProviderTypes() {
@@ -45,6 +60,106 @@ public class ProviderServiceImpl implements ProviderService {
 
 	public List<String> getCounties() {
 		return providerDao.getCounties();
+	}
+	
+	/**
+	 * 
+	 * @param searchBo
+	 * @param providerList
+	 * @return List all the cities with in the searched geo radius.
+	 */
+	public Map<String, Double> listCitiesInVicinity(ProviderSearchBO searchBo,
+			List<Provider> providerList) {
+
+		StringBuilder urlBuilder;
+		StringBuilder destinationBuilder = new StringBuilder("");
+		String distance,destination,city,response,status;
+		double distanceInMiles;
+		URL url;
+		HttpURLConnection conn;
+		InputStream in;
+		JsonParser jsonParser = new JsonParser();
+		Map<String, Double> citiesInVicinity = new HashMap<String, Double>();
+
+		try {
+			for (int j=0; j<providerList.size();j++) {
+				
+				urlBuilder = new StringBuilder();
+				urlBuilder.append("http://maps.googleapis.com/maps/api/distancematrix/json?origins=");
+				urlBuilder.append(searchBo.getCity()).append(",").append("MS").append(",USA&destinations=");
+				
+				city = providerList.get(j).getAddress().getCity().replace(" ", "+");
+				if (destinationBuilder.indexOf(city) < 0) {
+					destinationBuilder.append(city).append(",").append("MS").append(",USA|");
+					urlBuilder.append(city).append(",").append("MS").append(",USA|");
+				} else {
+					continue;
+				}
+				url = new URL(urlBuilder.toString());
+				conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("POST");
+				conn.setChunkedStreamingMode(1200);
+				conn.setDoOutput(true);
+				in = new BufferedInputStream(conn.getInputStream());
+				response = org.apache.commons.io.IOUtils.toString(in, "UTF-8");
+
+				status = jsonParser.parse(response).getAsJsonObject().get("status").getAsString();
+				if (status.equalsIgnoreCase("OK")) {
+					JsonArray destinations = jsonParser.parse(response)
+							.getAsJsonObject().getAsJsonArray("destination_addresses");
+					JsonArray elements = jsonParser.parse(response)
+							.getAsJsonObject().getAsJsonArray("rows").get(0)
+							.getAsJsonObject().getAsJsonArray("elements");
+					
+					for (int i = 0; i < elements.size(); i++) {
+						distance = elements.get(i).getAsJsonObject().get("distance").getAsJsonObject().get("text").getAsString();
+						distanceInMiles = Double.parseDouble(distance.split(" ")[0].trim()) * 0.621371;
+						if(distanceInMiles < 1){
+							distanceInMiles = 0;
+						}
+						destination = destinations.get(i).getAsString().split("\\,")[0];
+						if (distanceInMiles <= searchBo.getGeoRadius().getRadius()) {
+							citiesInVicinity.put(destination, distanceInMiles);
+						}
+					}
+				}
+				else if(status.equalsIgnoreCase("INVALID_REQUEST")){
+					return citiesInVicinity;
+				}
+				else{
+					--j;
+				}
+				
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return citiesInVicinity;
+	}
+
+	private List<Provider> getProvidersInVicinity(List<Provider> providerList,
+			Map<String, Double> citiesInVicinity) {
+		Address address;
+		List<Provider> removeList = new ArrayList<Provider>();
+		boolean isExists = false;
+		for (Provider provider : providerList) {
+
+			for (String city : citiesInVicinity.keySet()) {
+				address = provider.getAddress();
+				isExists = false;
+				if (address.getCity().equalsIgnoreCase(city)) {
+					address.setDistance(citiesInVicinity.get(city));
+					isExists = true;
+					break;
+				}
+			}
+			if (!isExists) {
+				removeList.add(provider);
+			}
+		}
+		providerList.removeAll(removeList);
+		return providerList;
 	}
 
 }

@@ -17,6 +17,7 @@ public class ProviderSearchBO {
 	private String county;
 	private String city;
 	private QualityStarRating qualityRating;
+	private GeoRadius geoRadius;
 
 	public String getProviderName() {
 		return providerName;
@@ -56,6 +57,14 @@ public class ProviderSearchBO {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public GeoRadius getGeoRadius() {
+		return geoRadius;
+	}
+
+	public void setGeoRadius(GeoRadius geoRadius) {
+		this.geoRadius = geoRadius;
 	}
 
 }
