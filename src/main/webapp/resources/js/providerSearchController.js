@@ -10,6 +10,7 @@
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
+    //function which loads the google map in the html page
     var map = new google.maps.Map(document.getElementById("googleMap"), mapCenter);
 
     var markers = [];
@@ -39,10 +40,12 @@
       }
     };
 
+    //function which sets the Transwindow visibility
     function setTransWindowVisiblitily(visibility){
     	document.getElementById('transWindow').style.visibility = visibility;
     }
     
+    //funtion which creates the marker for the searchresult in the map
     function createMarker(dataList) {
       deleteMarkers();
       for (var i = 0; i < dataList.length; i++) {
@@ -50,6 +53,7 @@
       }
     }
 
+    //Adds the markers in the map and also sets info window information for the marker
     function addMarker(data) {
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(data.address.latitude, data.address.longitude),
@@ -128,10 +132,13 @@
     //function which shows or hides the map
     $scope.toggleShowMap = function() {
       $scope.showMap = !$scope.showMap;
-      $timeout(function() {
-        google.maps.event.trigger(map, 'resize');
-        map.setCenter(mapCenter.center);
-      });
+      if($scope.showMap){
+    	$timeout(function() {
+          google.maps.event.trigger(map, 'resize');
+          map.setCenter(mapCenter.center);
+          map.setZoom(mapCenter.zoom);
+        });	  
+      }
     };
 
 

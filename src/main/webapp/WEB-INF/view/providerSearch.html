@@ -94,7 +94,8 @@
       <div class="col-xs-4">
         <button id="viewMap" class="btn btn-default btn-sm" data-ng-click="toggleShowMap()">
           <img class="imageRes" src="resources/images/Google-Maps-icon.png" alt="Show/Hide Map"></img>
-          <a href="">Show/Hide Map</a>
+          <a href="" data-ng-show="showMap">Hide Map</a>
+          <a href="" data-ng-show="!showMap">Show Map</a>
         </button>
       </div>  
       <div class="text-right col-xs-8">
