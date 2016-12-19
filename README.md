@@ -99,4 +99,40 @@ Fast growing cloud platform as a service, IBM’s Bluemix is one of the top PaaS
 ##List of Artifacts
 The client side artifacts are listed below:
 
+![folderstructure](https://cloud.githubusercontent.com/assets/24270380/21314863/3e134c26-c61f-11e6-9856-2d5944501b2e.PNG)
 
+The server side artifacts are listed below:
+
+![folderstructure1](https://cloud.githubusercontent.com/assets/24270380/21314889/6adc9d48-c61f-11e6-8fb1-45720717af35.PNG)
+
+##Issue Reporting:
+
+Despite working towards building a quality product with zero errors, we end up with having some errors and feature improvements from our clients/users of the application. In case of ending-up with a bug in the application/to request feature enhancement for the application, we encourage our users/clients to report the same under our GitHub code repository portal. 
+
+Please follow the below steps to report bugs/ feature enhancements to the application:
+
+1)	Go to the GitHub Code repository of the application and click on the issues tab in the page. Alternatively, you can directly go to the issues tab by clicking on the below URL: https://github.com/kyadthare/myproject/issues
+
+2)	Click on New Issue button on the top right corner of the page.
+
+3)	In the Issue form, please provide a valid title to the issue which you are going to report.
+
+4)	Kindly elaborate the steps to reproduce the bug and attach screen shots for the same. This will help us to quickly identify the issue and work on rectifying the same.
+
+5)	Once the issue is resolved, we will close the issue with proper status which will trigger a mail to the user who has reported the mail.
+
+6)	Then the user can validate the application again and provide feedback on the response.
+
+##References:
+
+1)	https://angularjs.org/ - for learning AngularJS framework.
+
+2)	http://getbootstrap.com/ - for learning Bootstrap framework.
+
+3)	http://www.w3schools.com/ - for learning the AngularJS,Bootstrap,HTML and CSS fundamentals.
+
+4)	https://spring.io/ - for learning about Spring framework.
+
+5)	http://hibernate.org/ - for learning about Hibernate framework.
+
+6)	http://www.seleniumhq.org/ - for learning selenium web driver automated testing framework.
