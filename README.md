@@ -125,14 +125,20 @@ Please follow the below steps to report bugs/ feature enhancements to the applic
 
 ##References:
 
-1)	https://angularjs.org/ - for learning AngularJS framework.
+1)	https://angularjs.org/ - for AngularJS framework.
 
-2)	http://getbootstrap.com/ - for learning Bootstrap framework.
+2)	http://getbootstrap.com/ - for Bootstrap framework.
 
-3)	http://www.w3schools.com/ - for learning the AngularJS,Bootstrap,HTML and CSS fundamentals.
+3)	http://www.w3schools.com/ - for AngularJS,Bootstrap,HTML and CSS fundamentals.
 
-4)	https://spring.io/ - for learning about Spring framework.
+4)	https://spring.io/ - for Spring framework.
 
-5)	http://hibernate.org/ - for learning about Hibernate framework.
+5)	http://hibernate.org/ - for Hibernate framework.
 
-6)	http://www.seleniumhq.org/ - for learning selenium web driver automated testing framework.
+6)	http://www.seleniumhq.org/ - for selenium web driver automated testing framework.
+
+7) https://travis-ci.org/ - for Travis Continuous Integration
+
+8) https://www.ibm.com/blogs/bluemix/2015/11/postgresql-database-with-elephantsql-on-bluemix/ - for ElephantSQL service in Bluemix
+
+
