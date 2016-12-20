@@ -1,5 +1,16 @@
 ##Project Description
 The ‘Care Provider Search’ application is designed as a prototype that implements the care provider search functionality, as of now, but can be scalable and robust enough to be an enterprise level application. This will serve the caseworkers in the Human Services department as well as parents to search for care providers in their vicinity based on provider name, provider type and star rating.
+####Key Features
+* Responsive UI is used to build front end. So this application can be accessible from multiple devices - laptop, tablet, mobile phone etc.
+* In addition to search based on name, type etc, it allows to search providers within a radius from a given city.
+* provider locations are marked in the google map which can be shown/hidden(default = hidden)
+* results can be sorted in either ascending or descending order based on name, type, city or star rating
+* pagination is provided to contro display of large number of result sets.
+* when a change is committed to master branch in the Github, application is rebuilt and deployed to Bluemix automatically by Travis CI service.
+* during every build JUnits are run by Travis CI automatcially.
+####Known issues/constraints
+* if vicinity is specified in the search criteria for example '10 miles from Aberdeen', and result set is too large, it takes about a minute to fetch results. Since we don't know the exact requirement of 'search providers in the vicinity', we have used driving distance between the two cities and not the physical distance(which is faster). We have some ideas to improve, but since it is a POC, not implemented.
+* Since we have used Bluemix's free plan(Turtle) for DB service, this allows only 4 concurrent connections. So this may hit performance when more number of people access the application.
 
 This application is built using latest open source technologies to demonstrate IBM Curam Implementation team’s capability. The GitHub is used as a source code management and version control tool which hosts the application codebase (Code Repository). The GitHub is configured with the Travis CI tool which integrates the application code and deploys on cloud based PaaS environment seamlessly. Application is accessible from a publicly available URL. 
     
