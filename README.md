@@ -1,7 +1,7 @@
 ##Project Description
-The ‘Care Provider Search’ App designed as a prototype that implements the care provider search functionality, as of now, but designed to be scalable and robust enough to be an enterprise level application, that will serve the caseworkers in the Human Services department. The prototype allows the case workers and parents to search for care providers in their vicinity based on provider name, provider type and star rating.
+The ‘Care Provider Search’ application is designed as a prototype that implements the care provider search functionality, as of now, but can be scalable and robust enough to be an enterprise level application. This will serve the caseworkers in the Human Services department as well as parents to search for care providers in their vicinity based on provider name, provider type and star rating.
 
-The prototype is built using latest open source technologies to demonstrate IBM Curam Implementation team’s capability. The GitHub is used as a source code management and version control tool which hosts the application codebase (Code Repository). The GitHub is configured with the Travis CI tool which integrates the application code and deploys the application on cloud based PaaS environment seamlessly. The application can be accessed through a publicly available URL. 
+This application is built using latest open source technologies to demonstrate IBM Curam Implementation team’s capability. The GitHub is used as a source code management and version control tool which hosts the application codebase (Code Repository). The GitHub is configured with the Travis CI tool which integrates the application code and deploys on cloud based PaaS environment seamlessly. Application is accessible from a publicly available URL. 
     
 Following sections describe the Research and Software Development Life cycle followed in this project with implications from the best practices followed in the IBM Labs.
 
