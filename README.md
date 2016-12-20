@@ -8,6 +8,7 @@ The ‘Care Provider Search’ application is designed as a prototype that imple
 * pagination is provided to contro display of large number of result sets.
 * when a change is committed to master branch in the Github, application is rebuilt and deployed to Bluemix automatically by Travis CI service.
 * during every build JUnits are run by Travis CI automatcially.
+
 ####Known issues/constraints
 * if vicinity is specified in the search criteria for example '10 miles from Aberdeen', and result set is too large, it takes about a minute to fetch results. Since we don't know the exact requirement of 'search providers in the vicinity', we have used driving distance between the two cities and not the physical distance(which is faster). We have some ideas to improve, but since it is a POC, not implemented.
 * Since we have used Bluemix's free plan(Turtle) for DB service, this allows only 4 concurrent connections. So this may hit performance when more number of people access the application.
