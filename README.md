@@ -69,7 +69,7 @@ The next section will list out the frameworks used in this project followed by t
 * Google Map Geocode API
 
 ####Database
-* PostgresSQL, ElephantSQL service
+* PostgreSQL, ElephantSQL service
 
 ####Source Control, CI and build tool
 * GitHub
@@ -100,8 +100,8 @@ Bootstrap is the most popular open source front end web framework for developing
 ###Spring and Hibernate
 We selected Spring and Hibernate for web back end logic due to their wide spread usage in the large enterprise applications. Spring Framework allows developers to develop scalable and reliable applications. Hibernate is ORM(Object Relational Mapper) framework that takes care of the boilerplate code to access database and allows the developer to concentrate on business logic. 
 
-###PostgresSQL 
-PostgresSQL has been selected for back end as this is open source database which is highly scalable and relational database management system This provides almost all features that any vendor specific relational database provides such as Oracle or DB2. This also supports object relationship mapping. In addition to this, PostgresSQL is hosted on many cloud platforms.
+###PostgreSQL 
+PostgreSQL has been selected for back end as this is open source database which is highly scalable and relational database management system This provides almost all features that any vendor specific relational database provides such as Oracle or DB2. This also supports object relationship mapping. In addition to this, PostgreSQL is hosted on many cloud platforms.
 
 ###Travis CI 
 Travis CI was our obvious choice for CI as this being very popular continuous integration service that integrates with GitHub repository and very easy to set up with just one configuration file travis.yml. Add few lines of instructions for building, testing and deploying, rest is taken care by Travis! Build results are reported on project site as well as via email notification.
@@ -152,5 +152,3 @@ Please follow the below steps to report bugs/ feature enhancements to the applic
 7) https://travis-ci.org/ - for Travis Continuous Integration
 
 8) https://www.ibm.com/blogs/bluemix/2015/11/postgresql-database-with-elephantsql-on-bluemix/ - for ElephantSQL service in Bluemix
-
-
