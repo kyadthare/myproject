@@ -66,14 +66,64 @@ public class ProviderServiceImpl implements ProviderService {
 	 * 
 	 * @param searchBo
 	 * @param providerList
+	 * @return List the urls with 10 destinations in the query string
+	 */
+	public List<String> urlBuilder(ProviderSearchBO searchBo,
+			List<Provider> providerList) {
+
+		StringBuilder urlBuilder = new StringBuilder();
+		StringBuilder refDestinationBuilder = new StringBuilder();
+		List<String> cityList = new ArrayList<String>();
+		String city;
+		int destinationSize = 10;
+		List<String> urlBatchList = new ArrayList<String>();
+
+		try {
+			
+			//logic to get the distinct cities
+			for (Provider provider : providerList) {
+				city = provider.getAddress().getCity().replace(" ", "+");
+				if (refDestinationBuilder.indexOf(city) < 0) {
+					refDestinationBuilder.append(city).append(",").append("MS").append(",USA|");
+					cityList.add(city);
+				} else {
+					continue;
+				}
+			}
+			
+			// logic of building the url
+			for (int j = 0; j < cityList.size(); j++) {
+
+				if (j % destinationSize == 0) {
+					if (urlBuilder.length() > 0) {
+						urlBatchList.add(urlBuilder.toString());
+					}
+					urlBuilder = new StringBuilder();
+					urlBuilder.append("http://maps.googleapis.com/maps/api/distancematrix/json?origins=");
+					urlBuilder.append(searchBo.getCity().replace(" ", "+")).append(",").append("MS").append(",USA&destinations=");
+				}
+				urlBuilder.append(cityList.get(j)).append(",").append("MS").append(",USA|");
+			}
+			if (urlBuilder.length() > 0) {
+				urlBatchList.add(urlBuilder.toString());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return urlBatchList;
+	}
+
+	/**
+	 * 
+	 * @param searchBo
+	 * @param urlBatchList
 	 * @return List all the cities with in the searched geo radius.
 	 */
 	public Map<String, Double> listCitiesInVicinity(ProviderSearchBO searchBo,
 			List<Provider> providerList) {
 
-		StringBuilder urlBuilder;
-		StringBuilder destinationBuilder = new StringBuilder("");
-		String distance,destination,city,response,status;
+		String distance, destination, response, status;
 		double distanceInMiles;
 		URL url;
 		HttpURLConnection conn;
@@ -82,20 +132,10 @@ public class ProviderServiceImpl implements ProviderService {
 		Map<String, Double> citiesInVicinity = new HashMap<String, Double>();
 
 		try {
-			for (int j=0; j<providerList.size();j++) {
-				
-				urlBuilder = new StringBuilder();
-				urlBuilder.append("http://maps.googleapis.com/maps/api/distancematrix/json?origins=");
-				urlBuilder.append(searchBo.getCity()).append(",").append("MS").append(",USA&destinations=");
-				
-				city = providerList.get(j).getAddress().getCity().replace(" ", "+");
-				if (destinationBuilder.indexOf(city) < 0) {
-					destinationBuilder.append(city).append(",").append("MS").append(",USA|");
-					urlBuilder.append(city).append(",").append("MS").append(",USA|");
-				} else {
-					continue;
-				}
-				url = new URL(urlBuilder.toString());
+			List<String> urlBatchList = urlBuilder(searchBo, providerList);
+			for (int j = 0; j < urlBatchList.size(); j++) {
+
+				url = new URL(urlBatchList.get(j));
 				conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("POST");
 				conn.setChunkedStreamingMode(1200);
@@ -110,11 +150,12 @@ public class ProviderServiceImpl implements ProviderService {
 					JsonArray elements = jsonParser.parse(response)
 							.getAsJsonObject().getAsJsonArray("rows").get(0)
 							.getAsJsonObject().getAsJsonArray("elements");
-					
+
 					for (int i = 0; i < elements.size(); i++) {
-						distance = elements.get(i).getAsJsonObject().get("distance").getAsJsonObject().get("text").getAsString();
+						distance = elements.get(i).getAsJsonObject()
+								.get("distance").getAsJsonObject().get("text").getAsString();
 						distanceInMiles = Double.parseDouble(distance.split(" ")[0].trim()) * 0.621371;
-						if(distanceInMiles < 1){
+						if (distanceInMiles < 1) {
 							distanceInMiles = 0;
 						}
 						destination = destinations.get(i).getAsString().split("\\,")[0];
@@ -122,14 +163,12 @@ public class ProviderServiceImpl implements ProviderService {
 							citiesInVicinity.put(destination, distanceInMiles);
 						}
 					}
-				}
-				else if(status.equalsIgnoreCase("INVALID_REQUEST")){
-					return citiesInVicinity;
-				}
-				else{
+				} else if (status.equalsIgnoreCase("INVALID_REQUEST")) {
+					continue;
+				} else {
 					--j;
 				}
-				
+
 			}
 
 		} catch (Exception e) {
@@ -138,6 +177,7 @@ public class ProviderServiceImpl implements ProviderService {
 		return citiesInVicinity;
 	}
 
+	
 	private List<Provider> getProvidersInVicinity(List<Provider> providerList,
 			Map<String, Double> citiesInVicinity) {
 		Address address;
