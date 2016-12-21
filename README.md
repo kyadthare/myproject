@@ -115,7 +115,8 @@ PostgreSQL has been selected for back end as this is open source database which 
 Travis CI was our obvious choice for continuous integration as this being very popular continuous integration service that integrates with GitHub repository. Configuring build and deployment is very easy in Travis CI as it requires one configuration file i.e. .travis.yml. Add few lines of instructions for building, testing and deploying, rest is taken care by Travis! Build results are reported on project site as well as via email notification.
 
 ###Bluemix
-Fast growing cloud platform as a service, IBM’s Bluemix is one of the top PaaS for building, running and managing apps and services. Bluemix hosts hundreds of services including IBM Watson and Weather.com. With three integrated deployment models - public, local and dedicated, Bluemix can be used in small business to large enterprises that need additional security.  
+Fast growing cloud platform as a service, IBM’s Bluemix is one of the top PaaS for building, running and managing apps and services. Bluemix hosts hundreds of services including IBM Watson and Weather.com. With three integrated deployment models - public, local and dedicated, Bluemix can be used in small business to large enterprises that need additional security. IBM Bluemix is a developer choice of  cloud platform since it offers catalogue of services and lets the developer combine them using a simple UI while hiding the complex IT tasks.  
+
 ##List of Artifacts
 The client side artifacts are listed below:
 
