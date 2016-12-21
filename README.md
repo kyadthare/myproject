@@ -1,4 +1,4 @@
-##Prototype url:
+##Prototype URL:
 http://careprovider.mybluemix.net. 
 
 ##Project Description
@@ -6,22 +6,22 @@ The ‘Care Provider Search’ application is designed as a prototype that imple
 ####Key Features
 * Responsive UI is used to build front end. So this application can be accessible from multiple devices - laptop, tablet, mobile phone etc.
 * In addition to search based on name, type etc, it allows to search providers within a radius from a given city.
-* provider locations are marked in the google map which can be shown/hidden (default = hidden)
-* results can be sorted in either ascending or descending order based on name, type, city or star rating
-* pagination is provided to control display of large number of result sets.
-* when a change is committed to master branch in the Github, application is rebuilt and deployed to Bluemix automatically by Travis CI service.
-* during every build JUnits are run by Travis CI automatically.
+* Provider locations are marked in the google map which can be shown/hidden (default = hidden)
+* Results can be sorted in either ascending or descending order based on name, type, city or star rating
+* Pagination is provided to control display of large number of result sets.
+* When a change is committed to master branch in the Github, application is rebuilt and deployed to Bluemix automatically by Travis CI service.
+* During every build JUnits are run by Travis CI automatically.
 
 ####Known issues/constraints
-* if vicinity is specified in the search criteria for example '10 miles from Aberdeen', and result set is too large, it takes about a minute to fetch results. Since we don't know the exact requirement of 'search providers in the vicinity', we have used driving distance between the two cities and not the physical distance(which is faster). We have some ideas to improve, but since it is a POC, not implemented.
-* Since we have used Bluemix's free plan(Turtle) for DB service, this allows only 4 concurrent connections. So this may hit performance when more number of people access the application.
+* If vicinity is specified in the search criteria for example '10 miles from Aberdeen', and result set is too large, it takes about a minute to fetch results. Since we don't know the exact requirement of 'search providers in the vicinity', we have used driving distance between the two cities and not the physical distance (which is faster). We have some ideas to improve, but since it is a POC, not implemented.
+* Since we have used Bluemix's free plan (Turtle) for DB service, this allows only 4 concurrent connections. So this may hit performance when more number of people access the application.
 
 This application is built using latest open source technologies to demonstrate IBM Curam Implementation team’s capability. The GitHub is used as a source code management and version control tool which hosts the application codebase (Code Repository). The GitHub is configured with the Travis CI tool which integrates the application code and deploys on cloud based PaaS environment seamlessly. Application is accessible from a publicly available URL. 
     
 Following sections describe the Research and Software Development Life cycle followed in this project with implications from the best practices followed in the IBM Labs.
 
 ##Application Setup guide:
-The ‘Care Provider Search’ App has been deployed already in PaaS environment at  IBM Bluemix. You can access the application by clicking on the url: http://careprovider.mybluemix.net. 
+The ‘Care Provider Search’ App has been deployed already in PaaS environment at  IBM Bluemix. You can access the application by clicking on the URL: http://careprovider.mybluemix.net. 
 
 ##Deployment Instructions
 ###Development environment:
@@ -33,7 +33,7 @@ Clone the repository using command line command:
 
 git clone https://github.com/kyadthare/myproject.git   <your-directory>
 
-Download  EGit Plug-in for eclipse and import  this repository and create local branch. Build and launch the application on the localhost at url http://localhost:8080/CareProvider 
+Download  EGit Plug-in for eclipse and import  this repository and create local branch. Build and launch the application on the localhost at URL: http://localhost:8080/CareProvider. This requires appserver such as Tomcat to be configured.
 
 ###Configure IBM Bluemix cloud platform
 
@@ -46,11 +46,11 @@ Create new ElephantSQL service and bind to CareProviderSearch app. Instructions 
 https://www.ibm.com/blogs/bluemix/2015/11/postgresql-database-with-elephantsql-on-bluemix/
 
 ###Continuous Integration and Deployment to Bluemix
-Sign in to Travis CI with your GitHub account, accepting the GitHub access permissions. Enable Travis CI for the 'myproject'  repository(needs admin privilege). Refer https://docs.travis-ci.com/user/getting-started/ for more details.
+Sign in to Travis CI with your GitHub account, accepting the GitHub access permissions. Enable Travis CI for the 'myproject'  repository (needs admin privilege). Refer https://docs.travis-ci.com/user/getting-started/ for more details.
 
 .travis.yml file is included in the code repository which contains instructions to build the application when a change is committed to the master branch and deploy the application on Bluemix using Cloud Foundry.
 
-Database connection details and Bluemix login details are specified as environment variable in .travis.yml file. and values are stored as environment variable in Travis CI for the security reasons.
+Database connection details and Bluemix login details are specified as environment variable in .travis.yml file and values are stored as environment variable in Travis CI for the security reasons.
 
 manifest.yml file contains details about .war file path, domain, application name, memory to be allocated in Bluemix, no of instances etc.
 
@@ -149,7 +149,7 @@ Please follow the below steps to report bugs/ feature enhancements to the applic
 
 2)	http://getbootstrap.com/ - for Bootstrap framework.
 
-3)	http://www.w3schools.com/ - for AngularJS,Bootstrap,HTML and CSS fundamentals.
+3)	http://www.w3schools.com/ - for AngularJS, Bootstrap, HTML and CSS fundamentals.
 
 4)	https://spring.io/ - for Spring framework.
 
