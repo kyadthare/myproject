@@ -4,6 +4,15 @@ footer{
   height: 50px;
 }
 
+.text-warning{
+  color:#FF5200;
+}
+
+.mapPad{
+  padding-top: 6px;
+  display: block;
+}
+
 #transWindow {
   visibility: hidden;
   position: absolute;
@@ -132,13 +141,13 @@ hr {
 
 @media only screen and (max-width: 768px) {
   .pagination > li > a {
-    padding: 2px 4px;
+    padding: 3px 6px;
   }
   .table > tbody > tr > td {
     padding: 2px;
   }
   .btn-sm {
-    font-size: 7px;
+    font-size: 8px;
   }
   .container-fluid {
     padding-right: 5px;

@@ -5,11 +5,12 @@
   var providerSearchController = function($scope, $http, $location, $anchorScroll, $timeout) {
 
     var mapCenter = {
-      center: new google.maps.LatLng(36.0078, -98.0929),
+      center: new google.maps.LatLng(32.3547, -89.3985),
       zoom: 6,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
+    //function which loads the google map in the html page
     var map = new google.maps.Map(document.getElementById("googleMap"), mapCenter);
 
     var markers = [];
@@ -39,10 +40,12 @@
       }
     };
 
+    //function which sets the Transwindow visibility
     function setTransWindowVisiblitily(visibility){
     	document.getElementById('transWindow').style.visibility = visibility;
     }
     
+    //funtion which creates the marker for the searchresult in the map
     function createMarker(dataList) {
       deleteMarkers();
       for (var i = 0; i < dataList.length; i++) {
@@ -50,6 +53,7 @@
       }
     }
 
+    //Adds the markers in the map and also sets info window information for the marker
     function addMarker(data) {
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(data.address.latitude, data.address.longitude),
@@ -58,12 +62,12 @@
       });
 
       var infowindow = new google.maps.InfoWindow({
-        content: '<div class="fontHeading padSpace">' + data.name +
-          '</div><div class="fontSmall"><strong>Type:</strong>' + data.providerType.description +
-          '<br/><strong>County:</strong>' + data.address.county +
+        content: '<div class="fontHeading">' + data.name +
+          '</div><div class="fontSmall mapPad"><strong>Type:</strong>' + data.providerType.description +
+          '<br/><span class="mapPad"><strong>County:</strong>' + data.address.county +
           '<br/><strong>City:</strong>' + data.address.city +
-          '<br/><strong>Capacity:</strong>' + data.capacity +
-          '<br/><strong>Phone#:</strong>' + data.phoneNumber + '</div>'
+          '<br/></span><span class="mapPad"><strong>Capacity:</strong>' + data.capacity +
+          '<br/><strong>Phone#:</strong>' + data.phoneNumber + '</span></div>'
       });
 
       marker.addListener('click', function() {
@@ -128,9 +132,13 @@
     //function which shows or hides the map
     $scope.toggleShowMap = function() {
       $scope.showMap = !$scope.showMap;
-      $timeout(function() {
-        google.maps.event.trigger(map, 'resize');
-      });
+      if($scope.showMap){
+    	$timeout(function() {
+          google.maps.event.trigger(map, 'resize');
+          map.setCenter(mapCenter.center);
+          map.setZoom(mapCenter.zoom);
+        });	  
+      }
     };
 
 
